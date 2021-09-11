@@ -7,11 +7,11 @@ package notificationlistener
 
 import (
 	"context"
+	"fmt"
 	"strconv"
 	"sync"
 
-	"github.com/TIBCOSoftware/flogo-lib/core/activity"
-	"github.com/SteveNY-Tibco/labs-air-contrib/labs-flogo-lib/notification/notificationbroker"
+	"github.com/SteveNY-Tibco/labs-air-contrib/common/notification/notificationbroker"
 	"github.com/project-flogo/core/data/metadata"
 	"github.com/project-flogo/core/support/log"
 	"github.com/project-flogo/core/trigger"
@@ -93,7 +93,7 @@ func (this *NotificationListener) Start() error {
 		logger.Info("(NotificationListener.Start) handler = ", handler)
 		broker, exist := handler.Settings()[cNotifierID]
 		if !exist {
-			return activity.NewError("Illegal broker !", "F1-Air-4001", nil)
+			return fmt.Errorf("Illegal broker : key = %s\n", cNotifierID)
 		}
 
 		brokerID := broker.(string)
