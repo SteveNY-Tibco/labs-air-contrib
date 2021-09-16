@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/base64"
 	"encoding/json"
-	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -228,21 +227,14 @@ func (t *Trigger) Initialize(ctx trigger.InitContext) error {
 }
 
 func initClientOption(settings *Settings) *mqtt.ClientOptions {
-	/*
-		opts := mqtt.NewClientOptions()
-		opts.AddBroker(settings.Broker)
-		opts.SetClientID(settings.Id)
-		opts.SetUsername(settings.Username)
-		opts.SetPassword(settings.Password)
-		opts.SetCleanSession(settings.CleanSession)
-		opts.SetAutoReconnect(settings.AutoReconnect)
-	*/
-	opts := mqtt.NewClientOptions()
-	opts.AddBroker("tcp://192.168.1.152:1883")
-	opts.SetUsername("")
-	opts.SetPassword("")
-	opts.SetClientID("sub")
 
+	opts := mqtt.NewClientOptions()
+	opts.AddBroker(settings.Broker)
+	opts.SetClientID(settings.Id)
+	opts.SetUsername(settings.Username)
+	opts.SetPassword(settings.Password)
+	opts.SetCleanSession(settings.CleanSession)
+	opts.SetAutoReconnect(settings.AutoReconnect)
 	/*
 		if settings.Store != ":memory:" && settings.Store != "" {
 			opts.SetStore(mqtt.NewFileStore(settings.Store))
@@ -261,35 +253,23 @@ func initClientOption(settings *Settings) *mqtt.ClientOptions {
 func (t *Trigger) Start() error {
 
 	client := mqtt.NewClient(t.options)
+
 	if token := client.Connect(); token.Wait() && token.Error() != nil {
 		return token.Error()
 	}
 
+	t.client = client
+
 	for _, handler := range t.handlers {
-		client.Subscribe(ParseTopic(handler.settings.Topic).String(), 0, func(client mqtt.Client, msg mqtt.Message) {
-			fmt.Printf("* [%s] %s\n", msg.Topic(), string(msg.Payload()))
-		})
-	}
-
-	/*
-		client := mqtt.NewClient(t.options)
-
-		if token := client.Connect(); token.Wait() && token.Error() != nil {
+		parsed := ParseTopic(handler.settings.Topic)
+		if token := client.Subscribe(parsed.String(), byte(handler.settings.Qos), t.getHanlder(handler, parsed)); token.Wait() && token.Error() != nil {
+			t.logger.Errorf("Error subscribing to topic %s: %s", handler.settings.Topic, token.Error())
 			return token.Error()
 		}
 
-		t.client = client
+		t.logger.Debugf("Subscribed to topic: %s", handler.settings.Topic)
+	}
 
-		for _, handler := range t.handlers {
-			parsed := ParseTopic(handler.settings.Topic)
-			if token := client.Subscribe(parsed.String(), byte(handler.settings.Qos), t.getHanlder(handler, parsed)); token.Wait() && token.Error() != nil {
-				t.logger.Errorf("Error subscribing to topic %s: %s", handler.settings.Topic, token.Error())
-				return token.Error()
-			}
-
-			t.logger.Debugf("Subscribed to topic: %s", handler.settings.Topic)
-		}
-	*/
 	return nil
 }
 
