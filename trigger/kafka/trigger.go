@@ -143,7 +143,7 @@ func NewKafkaHandler(logger log.Logger, handler trigger.Handler, consumer sarama
 	}
 
 	for _, partition := range partitions {
-		logger.Debugf("Creating PartitionConsumer for partition: [%s:%d]", handlerSetting.Topic, partition)
+		logger.Debugf("Creating PartitionConsumer for partition: [%s:%d:%d]", handlerSetting.Topic, partition, offset)
 		partitionConsumer, err := consumer.ConsumePartition(handlerSetting.Topic, partition, offset)
 		if err != nil {
 			logger.Errorf("Creating PartitionConsumer for valid partition: [%s:%d] failed for reason: %s", handlerSetting.Topic, partition, err)
