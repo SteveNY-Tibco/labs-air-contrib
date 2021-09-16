@@ -243,16 +243,17 @@ func initClientOption(settings *Settings) *mqtt.ClientOptions {
 	opts.SetPassword("")
 	opts.SetClientID("sub")
 
-	if settings.Store != ":memory:" && settings.Store != "" {
-		opts.SetStore(mqtt.NewFileStore(settings.Store))
-	}
+	/*
+		if settings.Store != ":memory:" && settings.Store != "" {
+			opts.SetStore(mqtt.NewFileStore(settings.Store))
+		}
 
-	if settings.KeepAlive != 0 {
-		opts.SetKeepAlive(time.Duration(settings.KeepAlive) * time.Second)
-	} else {
-		opts.SetKeepAlive(2 * time.Second)
-	}
-
+		if settings.KeepAlive != 0 {
+			opts.SetKeepAlive(time.Duration(settings.KeepAlive) * time.Second)
+		} else {
+			opts.SetKeepAlive(2 * time.Second)
+		}
+	*/
 	return opts
 }
 
