@@ -228,14 +228,20 @@ func (t *Trigger) Initialize(ctx trigger.InitContext) error {
 }
 
 func initClientOption(settings *Settings) *mqtt.ClientOptions {
-
+	/*
+		opts := mqtt.NewClientOptions()
+		opts.AddBroker(settings.Broker)
+		opts.SetClientID(settings.Id)
+		opts.SetUsername(settings.Username)
+		opts.SetPassword(settings.Password)
+		opts.SetCleanSession(settings.CleanSession)
+		opts.SetAutoReconnect(settings.AutoReconnect)
+	*/
 	opts := mqtt.NewClientOptions()
-	opts.AddBroker(settings.Broker)
-	opts.SetClientID(settings.Id)
-	opts.SetUsername(settings.Username)
-	opts.SetPassword(settings.Password)
-	opts.SetCleanSession(settings.CleanSession)
-	opts.SetAutoReconnect(settings.AutoReconnect)
+	opts.AddBroker("tcp://192.168.1.152:1883")
+	opts.SetUsername("")
+	opts.SetPassword("")
+	opts.SetClientID("sub")
 
 	if settings.Store != ":memory:" && settings.Store != "" {
 		opts.SetStore(mqtt.NewFileStore(settings.Store))
@@ -253,13 +259,7 @@ func initClientOption(settings *Settings) *mqtt.ClientOptions {
 // Start implements trigger.Trigger.Start
 func (t *Trigger) Start() error {
 
-	opts := mqtt.NewClientOptions()
-	opts.AddBroker("tcp://192.168.1.152:1883")
-	opts.SetUsername("")
-	opts.SetPassword("")
-	opts.SetClientID("sub")
-
-	client := mqtt.NewClient(opts)
+	client := mqtt.NewClient(t.options)
 	if token := client.Connect(); token.Wait() && token.Error() != nil {
 		return token.Error()
 	}
