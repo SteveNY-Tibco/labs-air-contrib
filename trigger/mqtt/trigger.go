@@ -254,7 +254,7 @@ func initClientOption(settings *Settings) *mqtt.ClientOptions {
 func (t *Trigger) Start() error {
 
 	opts := mqtt.NewClientOptions()
-	opts.AddBroker("tcp://192.168.1.152")
+	opts.AddBroker("tcp://192.168.1.152:1883")
 	opts.SetUsername("")
 	opts.SetPassword("")
 	opts.SetClientID("sub")
