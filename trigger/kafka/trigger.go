@@ -5,8 +5,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-
-	//	"strconv"
+	"strconv"
 	"strings"
 	"time"
 
@@ -55,10 +54,6 @@ func (t *Trigger) Initialize(ctx trigger.InitContext) error {
 	var err error
 	t.conn, err = getKafkaConnection(ctx.Logger(), t.settings)
 
-	if nil != err {
-		return err
-	}
-
 	for _, handler := range ctx.GetHandlers() {
 		kafkaHandler, err := NewKafkaHandler(ctx.Logger(), handler, t.conn.Connection())
 		if err != nil {
@@ -91,125 +86,69 @@ func (t *Trigger) Stop() error {
 	return nil
 }
 
-func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
-	consumers := make(chan *sarama.ConsumerMessage)
-	errors := make(chan *sarama.ConsumerError)
-	for _, topic := range topics {
-		if strings.Contains(topic, "__consumer_offsets") {
-			continue
-		}
-		partitions, _ := master.Partitions(topic)
-		// this only consumes partition no 1, you would probably want to consume all partitions
-		consumer, err := master.ConsumePartition(topic, partitions[0], sarama.OffsetOldest)
-		if nil != err {
-			fmt.Printf("Topic %v Partitions: %v", topic, partitions)
-			panic(err)
-		}
-		fmt.Println(" Start consuming topic ", topic)
-		go func(topic string, consumer sarama.PartitionConsumer) {
-			for {
-				select {
-				case consumerError := <-consumer.Errors():
-					errors <- consumerError
-					fmt.Println("consumerError: ", consumerError.Err)
-
-				case msg := <-consumer.Messages():
-					consumers <- msg
-					fmt.Println("Got message on topic ", topic, msg.Value)
-				}
-			}
-		}(topic, consumer)
-	}
-
-	return consumers, errors
-}
-
 // NewKafkaHandler creates a new kafka handler to handle a topic
 func NewKafkaHandler(logger log.Logger, handler trigger.Handler, consumer sarama.Consumer) (*Handler, error) {
 
-	config := sarama.NewConfig()
-	config.ClientID = "go-kafka-consumer"
-	config.Consumer.Return.Errors = true
-
-	brokers := []string{"192.168.1.152:29092"}
-
-	// Create new consumer
-	master, err := sarama.NewConsumer(brokers, config)
+	handlerSetting := &HandlerSettings{}
+	err := metadata.MapToStruct(handler.Settings(), handlerSetting, true)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	defer func() {
-		if err := master.Close(); err != nil {
-			panic(err)
-		}
-	}()
+	kafkaHandler := &Handler{logger: logger, shutdown: make(chan struct{}), handler: handler, deserializer: handlerSetting.Deserializer}
 
-	topics, _ := master.Topics()
+	if handlerSetting.Topic == "" {
+		return nil, fmt.Errorf("topic string was not provided for handler: [%s]", handler)
+	}
 
-	_, _ = consume(topics, master)
+	logger.Debugf("Subscribing to topic [%s]", handlerSetting.Topic)
 
-	/*
-		handlerSetting := &HandlerSettings{}
-			err := metadata.MapToStruct(handler.Settings(), handlerSetting, true)
-			if err != nil {
-				return nil, err
-			}
+	offset := sarama.OffsetNewest
 
-			kafkaHandler := &Handler{logger: logger, shutdown: make(chan struct{}), handler: handler, deserializer: handlerSetting.Deserializer}
+	//offset
+	if handlerSetting.Offset != 0 {
+		offset = handlerSetting.Offset
+	}
 
-			if handlerSetting.Topic == "" {
-				return nil, fmt.Errorf("topic string was not provided for handler: [%s]", handler)
-			}
+	var partitions []int32
 
-			logger.Debugf("Subscribing to topic [%s]", handlerSetting.Topic)
+	validPartitions, err := consumer.Partitions(handlerSetting.Topic)
+	if err != nil {
+		return nil, err
+	}
+	logger.Debugf("Valid partitions for topic [%s] detected as: [%v]", handlerSetting.Topic, validPartitions)
 
-			offset := sarama.OffsetNewest
-
-			//offset
-			if handlerSetting.Offset != 0 {
-				offset = handlerSetting.Offset
-			}
-
-			var partitions []int32
-
-			validPartitions, err := consumer.Partitions(handlerSetting.Topic)
-			if err != nil {
-				return nil, err
-			}
-			logger.Debugf("Valid partitions for topic [%s] detected as: [%v]", handlerSetting.Topic, validPartitions)
-
-			if handlerSetting.Partitions != "" {
-				parts := strings.Split(handlerSetting.Partitions, ",")
-				for _, p := range parts {
-					n, err := strconv.Atoi(p)
-					if err == nil {
-						for _, validPartition := range validPartitions {
-							if int32(n) == validPartition {
-								partitions = append(partitions, int32(n))
-								break
-							}
-							logger.Errorf("Configured partition [%d] on topic [%s] does not exist and will not be subscribed", n, handlerSetting.Topic)
-						}
-					} else {
-						logger.Warnf("Partition [%s] specified for handler [%s] is not a valid number and was discarded", p, handler)
+	if handlerSetting.Partitions != "" {
+		parts := strings.Split(handlerSetting.Partitions, ",")
+		for _, p := range parts {
+			n, err := strconv.Atoi(p)
+			if err == nil {
+				for _, validPartition := range validPartitions {
+					if int32(n) == validPartition {
+						partitions = append(partitions, int32(n))
+						break
 					}
+					logger.Errorf("Configured partition [%d] on topic [%s] does not exist and will not be subscribed", n, handlerSetting.Topic)
 				}
 			} else {
-				partitions = validPartitions
+				logger.Warnf("Partition [%s] specified for handler [%s] is not a valid number and was discarded", p, handler)
 			}
+		}
+	} else {
+		partitions = validPartitions
+	}
 
-			for _, partition := range partitions {
-				logger.Debugf("Creating PartitionConsumer for partition: [%s:%d:%d]", handlerSetting.Topic, partition, offset)
-				partitionConsumer, err := consumer.ConsumePartition(handlerSetting.Topic, partition, offset)
-				if err != nil {
-					logger.Errorf("Creating PartitionConsumer for valid partition: [%s:%d] failed for reason: %s", handlerSetting.Topic, partition, err)
-					return nil, err
-				}
-				kafkaHandler.consumers = append(kafkaHandler.consumers, partitionConsumer)
-			}
-	*/
-	return nil, nil
+	for _, partition := range partitions {
+		logger.Debugf("Creating PartitionConsumer for partition: [%s:%d]", handlerSetting.Topic, partition)
+		partitionConsumer, err := consumer.ConsumePartition(handlerSetting.Topic, partition, offset)
+		if err != nil {
+			logger.Errorf("Creating PartitionConsumer for valid partition: [%s:%d] failed for reason: %s", handlerSetting.Topic, partition, err)
+			return nil, err
+		}
+		kafkaHandler.consumers = append(kafkaHandler.consumers, partitionConsumer)
+	}
+
+	return kafkaHandler, nil
 }
 
 // Handler is a kafka topic handler
@@ -285,11 +224,11 @@ func (h *Handler) consumePartition(consumer sarama.PartitionConsumer) {
 
 // Start starts the handler
 func (h *Handler) Start() error {
-	/*
-		for _, consumer := range h.consumers {
-			go h.consumePartition(consumer)
-		}
-	*/
+
+	for _, consumer := range h.consumers {
+		go h.consumePartition(consumer)
+	}
+
 	return nil
 }
 
