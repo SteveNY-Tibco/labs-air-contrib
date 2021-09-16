@@ -107,7 +107,7 @@ func NewKafkaHandler(logger log.Logger, handler trigger.Handler, consumer sarama
 
 	logger.Debugf("Subscribing to topic [%s]", handlerSetting.Topic)
 
-	offset := 0 //sarama.OffsetNewest
+	offset := int64(0) //sarama.OffsetNewest
 
 	//offset
 	if handlerSetting.Offset != 0 {
