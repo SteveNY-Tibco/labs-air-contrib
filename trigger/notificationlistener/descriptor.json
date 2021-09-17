@@ -1,13 +1,13 @@
 {
 	"name": "notificationlistener",
 	"type": "flogo:trigger",
-	"ref": "github.com/SteveNY-Tibco/labs-air-contrib/ModelOps/trigger/notificationlistener",
+	"ref": "github.com/SteveNY-Tibco/labs-air-contrib/trigger/notificationlistener",
 	"version": "0.0.1",
 	"title": "Notification Listener",
 	"description": "Listen to and deliver notification",
-	"homepage": "github.com/SteveNY-Tibco/labs-air-contrib/ModelOps/trigger/notificationlistener",
+	"homepage": "github.com/SteveNY-Tibco/labs-air-contrib/trigger/notificationlistener",
 	"display": {
-		"category": "ModelOps",
+		"category": "LC",
 		"visible": true,
 		"smallIcon": "notificationlistener.png",
 		"description": "This trigger deliver notification"
