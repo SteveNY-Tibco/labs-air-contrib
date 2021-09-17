@@ -53,6 +53,9 @@ func (t *Trigger) Initialize(ctx trigger.InitContext) error {
 
 	var err error
 	t.conn, err = getKafkaConnection(ctx.Logger(), t.settings)
+	if nil != err {
+		return err
+	}
 
 	for _, handler := range ctx.GetHandlers() {
 		kafkaHandler, err := NewKafkaHandler(ctx.Logger(), handler, t.conn.Connection())
