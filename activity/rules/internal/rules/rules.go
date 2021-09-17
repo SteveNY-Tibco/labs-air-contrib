@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/SteveNY-Tibco/labs-air-contrib/activity/rules/internal/sender"
-	"github.com/SteveNY-Tibco/labs-air-contrib/common/rules"
+	"github.com/SteveNY-Tibco/labs-air-contrib/common/rules/air/rules"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
 	"github.com/project-flogo/rules/common/model"
 	"github.com/project-flogo/rules/config"

@@ -5,9 +5,12 @@ github.com/Shopify/sarama v1.22.0/go.mod h1:lm3THZ8reqBDBQKQyb5HB3sY1lKp3grEbQ81
 github.com/Shopify/sarama v1.26.1/go.mod h1:NbSGBSSndYaIhRcBtY9V0U7AyH+x71bG668AuWys/yU=
 github.com/Shopify/toxiproxy v2.1.4+incompatible/go.mod h1:OXgGpZ6Cli1/URJOF1DMxUHB2q5Ap20/P/eIdh4G0pI=
 github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20210917170536-40a15f593838 h1:5s9VWCTchAMlwTCuYguzgS7OE0kjGM3T+OhOQxpxTQY=
+github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20210917175835-9894778e4af1 h1:rbDbbSWnkh3QXbZ5SeD1rNkpGuGmFHfxxkveYt51Ipo=
 github.com/SteveNY-Tibco/labs-air-contrib/common/notification v0.0.0-20210917170536-40a15f593838 h1:cVgx+4W34GyXHwjjjTjJ4/EjYm7ZGuw1YwjOCNgDThs=
 github.com/SteveNY-Tibco/labs-air-contrib/common/notification v0.0.0-20210917170536-40a15f593838/go.mod h1:7TSBKTTBm3XYskfac3qIctQhDcaubvxeuYg0bmVc624=
 github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20210917170536-40a15f593838 h1:W/5TNtVoNzWIw8XmiBZP6+QJ0fWUUUON1bdLOO6VF2k=
+github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20210917175835-9894778e4af1 h1:V9D8eSF9Um6+nKcDLMmkgf6hxOenDkWHphbFRxq7tQI=
+github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20210917175835-9894778e4af1/go.mod h1:VAikJUvmR0/oA7dkGWOnZVf5ayzv/VLhvJ6WZFNp2X4=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib v0.0.0-20210909231647-1548f4395ab7 h1:PCG0ZWYhO2z7j8Kntdzmvq+tg7n744Z/zHLNbS8BleA=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/keywordreplace v0.0.0-20210909231647-1548f4395ab7 h1:Nmi8DHUMC9XwkFdl0bvdBqZcHOa1WdCFZj/niA5B9pY=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/keywordreplace v0.0.0-20210909231647-1548f4395ab7/go.mod h1:f5g6oC7XUTk5lbIGBFmXoo6ZgcDLAnU1aDnoSK3XXis=
