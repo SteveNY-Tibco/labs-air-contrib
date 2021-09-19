@@ -8,8 +8,8 @@ package factory
 import (
 	"sync"
 
-	"github.com/P-f1/LC/labs-graphbuilder-lib/dbservice"
-	dgraph "github.com/P-f1/LC/labs-graphbuilder-lib/dbservice/dgraph/factory"
+	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice"
+	dgraph "github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/factory"
 )
 
 var (
