@@ -78,14 +78,13 @@ func (this *GraphFactory) NewManager(settings map[string]interface{}) (connectio
 		return nil, errors.New("Required Parameter Metadata is missing")
 	}
 
-	graphModel, err := model.NewGraphModel(cName, cMetadata)
+	model, err := model.NewGraphModel(cName, cMetadata)
 	if nil != err {
 		return nil, err
 	}
 
 	sharedConn.name = cName
-	graph := this.graphBuilder.CreateGraph(graphModel.GetId(), graphModel)
-	sharedConn.graph = &graph
+	sharedConn.model = model
 
 	return sharedConn, nil
 }
@@ -93,12 +92,30 @@ func (this *GraphFactory) NewManager(settings map[string]interface{}) (connectio
 // SharedGraphManager details
 type SharedGraphManager struct {
 	name  string
-	graph *model.Graph
+	model *model.GraphDefinition
 }
 
-// Get graph model
-func (this *SharedGraphManager) GetModel() *model.Graph {
-	return this.graph
+// Create graph
+func (this *SharedGraphManager) CreateGraph(
+	nodes interface{},
+	edges interface{},
+	allowNullKey bool) (*model.Graph, error) {
+
+	graphId := this.model.GetId()
+	deltaGraph := factory.graphBuilder.CreateGraph(graphId, this.model)
+	err := factory.graphBuilder.BuildGraph(
+		&deltaGraph,
+		this.model,
+		nodes,
+		edges,
+		allowNullKey,
+	)
+
+	if nil != err {
+		return nil, err
+	}
+
+	return &deltaGraph, nil
 }
 
 // Type SharedGraphManager details
