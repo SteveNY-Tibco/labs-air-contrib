@@ -96,6 +96,11 @@ type SharedGraphManager struct {
 	graph *model.Graph
 }
 
+// Get graph model
+func (this *SharedGraphManager) GetModel() *model.Graph {
+	return this.graph
+}
+
 // Type SharedGraphManager details
 func (this *SharedGraphManager) Type() string {
 	return "Graph"
@@ -103,7 +108,7 @@ func (this *SharedGraphManager) Type() string {
 
 // GetConnection SharedGraphManager details
 func (this *SharedGraphManager) GetConnection() interface{} {
-	return this.graph
+	return this
 }
 
 // ReleaseConnection SharedGraphManager details
