@@ -10,7 +10,7 @@
        "smallIcon": "dataselector.png",
        "description": "This activity select datas from array"
     },
-	"ref": "github.com/SteveNY-Tibco/labs-air-contrib/ModelOps/activity/dataselector",
+	"ref": "github.com/SteveNY-Tibco/labs-air-contrib/activity/dataselector",
 	"settings": 	[
 		{
 			"name": "targets",
