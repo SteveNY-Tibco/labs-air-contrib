@@ -9,7 +9,7 @@ This trigger allows you to listen to messages on MQTT.
 
 ### Flogo CLI
 ```bash
-flogo install github.com/project-flogo/edge-contrib/trigger/mqtt
+flogo install github.com/SteveNY-Tibco/labs-air-contrib/trigger/mqtt
 ```
 
 ## Configuration
@@ -69,7 +69,7 @@ MQTT wildcard syntax is supported. For example if the topic is '/x/+/y/#' then t
 {
   "id": "mqtt-trigger",
   "name": "Mqtt Trigger",
-  "ref": "github.com/project-flogo/edge-contrib/trigger/mqtt",
+  "ref": "github.com/SteveNY-Tibco/labs-air-contrib/trigger/mqtt",
   "settings": {
       "broker" : "tcp://localhost:1883",
      	"id":"client-1"
