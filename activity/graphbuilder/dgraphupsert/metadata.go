@@ -11,7 +11,7 @@ type Settings struct {
 	ReadableExternalId int                `md:"readableExternalId,required"`
 	ExplicitType       bool               `md:"explicitType,required"`
 	TypeTag            string             `md:"typeTag,required"`
-	AttrWithPrefix     boolean            `md:"attrWithPrefix,required"`
+	AttrWithPrefix     bool               `md:"attrWithPrefix,required"`
 }
 
 // Input Structure
