@@ -166,7 +166,7 @@ type SharedDgraphManager struct {
 	dgraphService dbservice.UpsertService
 }
 
-func (this *SharedDgraphManager) CreateService(connectorName string, properties map[string]interface{}) (dbservice.UpsertService, error) {
+func (this *SharedDgraphManager) Lookup(connectorName string, properties map[string]interface{}) (dbservice.UpsertService, error) {
 	var err error
 	if nil == this.dgraphService {
 		this.dgraphService, err = services.NewDgraphService(properties)
