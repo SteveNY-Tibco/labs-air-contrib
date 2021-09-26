@@ -99,7 +99,7 @@ type SharedGraphManager struct {
 }
 
 // Create graph
-func (this *SharedGraphManager) CreateGraph(
+func (this *SharedGraphManager) BuildGraph(
 	nodes interface{},
 	edges interface{},
 	allowNullKey bool) (*model.Graph, error) {
