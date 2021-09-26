@@ -8,6 +8,7 @@ import (
 
 	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice"
 	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/services"
+	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model"
 	"github.com/project-flogo/core/data"
 	"github.com/project-flogo/core/data/coerce"
 	"github.com/project-flogo/core/data/metadata"
@@ -166,7 +167,11 @@ type SharedDgraphManager struct {
 	dgraphService dbservice.UpsertService
 }
 
-func (this *SharedDgraphManager) Lookup(connectorName string, properties map[string]interface{}) (dbservice.UpsertService, error) {
+func ReconstructGraph(graphData map[string]interface{}) model.Graph {
+	return model.ReconstructGraph(graphData)
+}
+
+func (this *SharedDgraphManager) Lookup(clientID string, properties map[string]interface{}) (dbservice.UpsertService, error) {
 	var err error
 	if nil == this.dgraphService {
 		this.dgraphService, err = services.NewDgraphService(properties)
