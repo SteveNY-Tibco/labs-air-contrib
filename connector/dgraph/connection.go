@@ -1,4 +1,4 @@
-package connection
+package dgraph
 
 import (
 	b64 "encoding/base64"
@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice"
-	dbsf "github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/factory"
+	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/services"
 	"github.com/project-flogo/core/data"
 	"github.com/project-flogo/core/data/coerce"
 	"github.com/project-flogo/core/data/metadata"
@@ -55,7 +55,6 @@ func (this *DgraphFactory) Type() string {
 // NewManager DgraphFactory
 func (this *DgraphFactory) NewManager(settings map[string]interface{}) (connection.Manager, error) {
 
-	sharedConn := &SharedDgraphManager{}
 	s := &Settings{}
 
 	var err = metadata.MapToStruct(settings, s, false)
@@ -148,9 +147,10 @@ func (this *DgraphFactory) NewManager(settings map[string]interface{}) (connecti
 
 	logCache.Debug("properties : ", properties)
 
-	_, err = dbsf.GetFactory(dbservice.Dgraph).CreateUpsertService(cName, properties)
-	//dgraph.GetFactory().CreateService(connectorName, properties)
-	//sharedConn.dgraphService = dgraphService
+	sharedConn := &SharedDgraphManager{
+		name:       cName,
+		properties: properties,
+	}
 
 	if nil != err {
 		return nil, err
@@ -163,7 +163,20 @@ func (this *DgraphFactory) NewManager(settings map[string]interface{}) (connecti
 type SharedDgraphManager struct {
 	name          string
 	properties    map[string]interface{}
-	dgraphService dbservice.DBServiceFactory
+	dgraphService dbservice.UpsertService
+}
+
+func (this *SharedDgraphManager) CreateService(connectorName string, properties map[string]interface{}) (dbservice.UpsertService, error) {
+	var err error
+	if nil == this.dgraphService {
+		this.dgraphService, err = services.NewDgraphService(properties)
+		logCache.Info("(DgraphServiceFactory.CreateUpsertService) upsertService : ", this.dgraphService)
+		if nil != err {
+			logCache.Info("(DgraphServiceFactory.CreateUpsertService) err : ", err)
+			return nil, err
+		}
+	}
+	return this.dgraphService.(dbservice.UpsertService), nil
 }
 
 // Type SharedDgraphManager details
