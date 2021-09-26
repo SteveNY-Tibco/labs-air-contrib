@@ -85,14 +85,16 @@ func (this *GraphFactory) NewManager(settings map[string]interface{}) (connectio
 
 	sharedConn.name = cName
 	sharedConn.model = model
+	sharedConn.tempGraph = factory.graphBuilder.CreateGraph(model.GetId(), model)
 
 	return sharedConn, nil
 }
 
 // SharedGraphManager details
 type SharedGraphManager struct {
-	name  string
-	model *model.GraphDefinition
+	name      string
+	tempGraph *model.Graph
+	model     *model.GraphDefinition
 }
 
 // Create graph
@@ -102,7 +104,7 @@ func (this *SharedGraphManager) CreateGraph(
 	allowNullKey bool) (*model.Graph, error) {
 
 	graphId := this.model.GetId()
-	deltaGraph := factory.graphBuilder.CreateGraph(graphId, this.model)
+	deltaGraph := factory.graphBuilder.BuildGraph(graphId, this.model)
 	err := factory.graphBuilder.BuildGraph(
 		&deltaGraph,
 		this.model,
@@ -115,7 +117,18 @@ func (this *SharedGraphManager) CreateGraph(
 		return nil, err
 	}
 
+	(*tempGraph).Merge(deltaGraph)
+
 	return &deltaGraph, nil
+}
+
+func (this *SharedGraphManager) ExportGraph map[string]interface{} (
+	graphData := make(map[string]interface{})
+	graphData["graph"] = a.graphBuilder.Export(tempGraph, a.graphModel)
+		
+	(*tempGraph).Clear()
+
+	return graphData
 }
 
 // Type SharedGraphManager details
