@@ -10,7 +10,7 @@
     "visible": true,
     "smallIcon": "graph.png"
   },
-  "ref": "github.com/P-f1/LC/GraphBuilder/connector/graph",
+  "ref": "github.com/SteveNY-Tibco/labs-air-contrib/connector/graph",
   "keyfield": "name",
   "settings": [
     {

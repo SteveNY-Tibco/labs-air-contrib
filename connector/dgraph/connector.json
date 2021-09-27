@@ -10,7 +10,7 @@
     "visible": true,
     "smallIcon": "dgraph.png"
   },
-  "ref": "github.com/P-f1/LC/GraphBuilder_dgraph/connector/dgraph",
+  "ref": "github.com/SteveNY-Tibco/labs-air-contrib/connector/dgraph",
   "keyfield": "name",
   "settings": [
     {
