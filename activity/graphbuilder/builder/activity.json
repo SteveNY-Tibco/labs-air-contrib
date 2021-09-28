@@ -12,7 +12,7 @@
        "description": "This activity build graph from incoming data"
     },
  
-    "ref": "github.com/P-f1/LC/GraphBuilder/activity/builder",
+    "ref": "github.com/SteveNY-Tibco/labs-air-contrib/activity/graphbuilder/builder",
 	"settings": [
 		{
 			"name": "GraphModel",
