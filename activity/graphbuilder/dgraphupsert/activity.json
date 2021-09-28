@@ -12,7 +12,7 @@
        "description": "This activity upsert to Dgraph"
     },
  
-    "ref": "github.com/P-f1/LC/GraphBuilder_dgraph/activity/dgraphupsert",
+    "ref": "github.com/SteveNY-Tibco/labs-air-contrib/activity/graphbuilder/dgraphupsert",
     "settings": [
 		{
             "name": "dgraphConnection",

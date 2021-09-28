@@ -3,10 +3,6 @@ module github.com/SteveNY-Tibco/labs-air-contrib/activity/graphbuilder/dgraphups
 go 1.14
 
 require (
-	github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice v0.0.0-20210926021849-8d8efec9c155
-	github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20210919144645-0e54905c82ae
-	github.com/SteveNY-Tibco/labs-air-contrib/connector/dgraph v0.0.0-20210926140205-184b7d7e7d29
-	github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20210909231647-1548f4395ab7
-	github.com/TIBCOSoftware/flogo-lib v0.5.8
+	github.com/SteveNY-Tibco/labs-air-contrib/connector/dgraph v0.0.0-20210927170241-e8a7233970e9
 	github.com/project-flogo/core v1.5.0
 )
