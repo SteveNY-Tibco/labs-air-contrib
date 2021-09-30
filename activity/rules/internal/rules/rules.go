@@ -16,7 +16,7 @@ import (
 	"github.com/project-flogo/rules/ruleapi"
 )
 
-var log = logger.GetLogger("tibco-f1-RuleEngine")
+var log = logger.GetLogger("labs-lc-RuleEngine")
 
 type ledBody struct {
 	Led string
@@ -111,10 +111,10 @@ func (this *RuleEngine) SetEngineID(engineID string) {
 
 // AddRule - add rule
 func (this *RuleEngine) AddRule(ruleDef RuleDefStruct) {
-	//fmt.Printf("Inside AddRule\n")
-	//fmt.Printf("Raw Object: %+v\n", ruleDef)
-	//fmt.Printf("Rule struct request device: %s\n", ruleDef.CondDevice)
-	//fmt.Printf("Rule struct request resource: %s\n", ruleDef.CondResource)
+	log.Debugf("Inside AddRule\n")
+	log.Debugf("Raw Object: %+v\n", ruleDef)
+	log.Debugf("Rule struct request device: %s\n", ruleDef.CondDevice)
+	log.Debugf("Rule struct request resource: %s\n", ruleDef.CondResource)
 
 	this.sendCommand = ruleDef.ActionSendCommand
 	this.sendNotification = ruleDef.ActionSendNotification
@@ -137,10 +137,10 @@ func (this *RuleEngine) AddRule(ruleDef RuleDefStruct) {
 	condContextJSON, err := json.Marshal(condContext)
 
 	if err != nil {
-		fmt.Printf("Rule request ERROR\n")
+		fmt.Errorf("Rule request ERROR\n")
 	}
 
-	//fmt.Printf("Marshalled condContext: %s\n", string(condContextJSON))
+	log.Debugf("Marshalled condContext: %s\n", string(condContextJSON))
 
 	rule := ruleapi.NewRule(ruleDef.Name)
 	rule.AddCondition("compareValuesCond", []string{"ReadingEvent", "ResourceConcept"}, this.compareValuesCond, string(condContextJSON))
@@ -151,9 +151,9 @@ func (this *RuleEngine) AddRule(ruleDef RuleDefStruct) {
 	err = this.ruleSession.AddRule(rule)
 
 	if err != nil {
-		fmt.Printf("ERROR adding rule: %s\n", rule.GetName())
+		log.Errorf("ERROR adding rule: %s\n", rule.GetName())
 	} else {
-		fmt.Printf("Added rule success for: %s\n", rule.GetName())
+		log.Debugf("Added rule success for: %s\n", rule.GetName())
 	}
 	this.ruleSession.ReplayTuplesForRule(ruleDef.Name)
 
@@ -166,9 +166,9 @@ func (this *RuleEngine) AddRule(ruleDef RuleDefStruct) {
 	err = this.ruleSession.AddRule(rule1)
 
 	if err != nil {
-		fmt.Printf("ERROR adding update rule: %s\n", rule1.GetName())
+		log.Errorf("ERROR adding update rule: %s\n", rule1.GetName())
 	} else {
-		fmt.Printf("Added rule success for: %s\n", rule1.GetName())
+		log.Debugf("Added rule success for: %s\n", rule1.GetName())
 	}
 	this.ruleSession.ReplayTuplesForRule(updateRuleName)
 
