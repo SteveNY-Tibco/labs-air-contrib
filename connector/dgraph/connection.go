@@ -70,9 +70,6 @@ func (this *DgraphFactory) NewManager(settings map[string]interface{}) (connecti
 	}
 
 	cDescription := s.Description
-	if cDescription == "" {
-		return nil, errors.New("Required Parameter ModelSource is missing")
-	}
 
 	cApiVersion := s.ApiVersion
 	if cApiVersion == "" {
@@ -87,14 +84,8 @@ func (this *DgraphFactory) NewManager(settings map[string]interface{}) (connecti
 	cTLSEnabled := s.TLSEnabled
 
 	cUser := s.User
-	if cUser == "" {
-		return nil, errors.New("Required Parameter Name is missing")
-	}
 
 	cPassword := s.Password
-	if cPassword == "" {
-		return nil, errors.New("Required Parameter ModelSource is missing")
-	}
 
 	cTLS := s.TLS
 	if cTLS == "" {
