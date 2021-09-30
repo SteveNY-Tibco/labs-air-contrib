@@ -63,7 +63,7 @@ func (this *GraphFactory) NewManager(settings map[string]interface{}) (connectio
 		return nil, errors.New("Required Parameter Name is missing")
 	}
 
-	cModelSource := s.ModelSource
+	//cModelSource := s.ModelSource
 	//	if cModelSource == "" {
 	//		return nil, errors.New("Required Parameter ModelSource is missing")
 	//	}
