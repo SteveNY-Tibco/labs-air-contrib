@@ -78,10 +78,6 @@ func UpdateAction(ctx context.Context, rs model.RuleSession, ruleName string, tu
 func CompareValuesCond(ruleName string, condName string, tuples map[model.TupleType]model.Tuple, ctx model.RuleContext) bool {
 	log.Debug(fmt.Sprintf("Condition Evaluated: [%s]-[%s]\n", ruleName, condName))
 
-	if true == true {
-		return true
-	}
-
 	condResult := false
 
 	readingTuple := tuples["ReadingEvent"]
