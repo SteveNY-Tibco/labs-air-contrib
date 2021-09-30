@@ -2,10 +2,10 @@ package f1
 
 import (
 	"encoding/json"
-	"f1/air/notify"
 	"time"
 
-	"github.com/P-f1/LC/labs-flogo-lib/notification/notificationbroker"
+	"github.com/SteveNY-Tibco/labs-air-contrib/common/notification"
+	"github.com/SteveNY-Tibco/labs-air-contrib/common/rules/notify"
 	"github.com/project-flogo/core/data"
 	"github.com/project-flogo/core/data/expression/function"
 )
