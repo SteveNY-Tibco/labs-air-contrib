@@ -17,7 +17,7 @@ var factory = &GraphFactory{graphBuilder: model.NewGraphBuilder()}
 type Settings struct {
 	Name        string `md:"name,required"`
 	Description string `md:"description"`
-	ModelSource string `md:"modelSource,required"`
+	ModelSource string `md:"modelSource"`
 	URL         string `md:"url"`
 	Model       string `md:"model,required"`
 	Metadata    string `md:"metadata,required"`
@@ -64,9 +64,9 @@ func (this *GraphFactory) NewManager(settings map[string]interface{}) (connectio
 	}
 
 	cModelSource := s.ModelSource
-	if cModelSource == "" {
-		return nil, errors.New("Required Parameter ModelSource is missing")
-	}
+	//	if cModelSource == "" {
+	//		return nil, errors.New("Required Parameter ModelSource is missing")
+	//	}
 
 	cModel := s.Model
 	if cModel == "" {
