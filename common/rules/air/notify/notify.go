@@ -55,8 +55,18 @@ func Eval(oldData map[string]interface{}, newData map[string]interface{}, thresh
 func triplet(value string) ([]float64, error) {
 	values := strings.Split(value, ",")
 	e1, err := strconv.ParseFloat(values[0], 64)
-	e2, err := strconv.ParseFloat(values[1], 64)
-	e3, err := strconv.ParseFloat(values[2], 64)
+	var e2 float64
+	if len(values) >= 2 {
+		e2, err = strconv.ParseFloat(values[1], 64)
+	} else {
+		e2 = float64(0)
+	}
+	var e3 float64
+	if len(values) >= 3 {
+		e3, err = strconv.ParseFloat(values[2], 64)
+	} else {
+		e3 = float64(0)
+	}
 	if nil != err {
 		return nil, err
 	}
