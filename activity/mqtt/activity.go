@@ -1,8 +1,10 @@
 package mqtt
 
 import (
+	"encoding/base64"
 	"strconv"
 	"strings"
+	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"github.com/project-flogo/core/activity"
@@ -176,9 +178,18 @@ func initClientOption(logger log.Logger, settings *Settings) *mqtt.ClientOptions
 	opts.AddBroker(settings.Broker)
 	opts.SetClientID(settings.Id)
 	opts.SetUsername(settings.Username)
-	opts.SetPassword(settings.Password)
+	password := settings.Password
+	if strings.HasPrefix(password, "SECRET:") {
+		pwdBytes, _ := base64.StdEncoding.DecodeString(password[7:])
+		password = string(pwdBytes)
+	}
+	opts.SetPassword(password)
 	opts.SetCleanSession(settings.CleanSession)
-	opts.KeepAlive(settings.KeepAlive)
+	if settings.KeepAlive != 0 {
+		opts.SetKeepAlive(time.Duration(settings.KeepAlive) * time.Second)
+	} else {
+		opts.SetKeepAlive(2 * time.Second)
+	}
 
 	if settings.Store != "" && settings.Store != ":memory:" {
 		logger.Debugf("Using file store: %s", settings.Store)

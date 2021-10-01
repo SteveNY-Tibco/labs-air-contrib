@@ -232,7 +232,12 @@ func initClientOption(settings *Settings) *mqtt.ClientOptions {
 	opts.AddBroker(settings.Broker)
 	opts.SetClientID(settings.Id)
 	opts.SetUsername(settings.Username)
-	opts.SetPassword(settings.Password)
+	password := settings.Password
+	if strings.HasPrefix(password, "SECRET:") {
+		pwdBytes, _ := base64.StdEncoding.DecodeString(password[7:])
+		password = string(pwdBytes)
+	}
+	opts.SetPassword(password)
 	opts.SetCleanSession(settings.CleanSession)
 	opts.SetAutoReconnect(settings.AutoReconnect)
 
