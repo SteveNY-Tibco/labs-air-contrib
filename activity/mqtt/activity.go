@@ -2,8 +2,11 @@ package mqtt
 
 import (
 	"encoding/base64"
+	"errors"
+	"fmt"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
@@ -12,6 +15,30 @@ import (
 	"github.com/project-flogo/core/support/log"
 	"github.com/project-flogo/core/support/ssl"
 )
+
+var clients = make(map[string]mqtt.Client)
+var clientMapMutex = &sync.Mutex{}
+
+func getClient(logger log.Logger, connectionID string, opts *mqtt.ClientOptions) (client mqtt.Client, err error) {
+	clientMapMutex.Lock()
+	defer clientMapMutex.Unlock()
+
+	client = clients[connectionID]
+	if client != nil {
+		logger.Debug("[mqtt.activity.getClient] Mqtt Publish is reusing an existing connection...")
+		return client, nil
+	}
+
+	client = mqtt.NewClient(opts)
+	logger.Debug("[mqtt.activity.getClient] Mqtt Publish is establishing a connection...")
+	if token := client.Connect(); token.Wait() && token.Error() != nil {
+		return nil, errors.New(fmt.Sprintf("Connection to mqtt broker failed %v", token.Error()))
+	}
+
+	clients[connectionID] = client
+
+	return client, nil
+}
 
 var activityMd = activity.ToMetadata(&Settings{}, &Input{}, &Output{})
 
@@ -124,10 +151,9 @@ func New(ctx activity.InitContext) (activity.Activity, error) {
 		options.SetTLSConfig(tlsConfig)
 	}
 
-	mqttClient := mqtt.NewClient(options)
-
-	if token := mqttClient.Connect(); token.Wait() && token.Error() != nil {
-		return nil, token.Error()
+	mqttClient, err := getClient(ctx.Logger(), settings.Broker, options)
+	if nil != err {
+		return nil, err
 	}
 
 	act := &Activity{
