@@ -81,15 +81,20 @@ func (this *DgraphFactory) NewManager(settings map[string]interface{}) (connecti
 		return nil, errors.New("Required Parameter Metadata is missing")
 	}
 
-	cTLSEnabled := s.TLSEnabled
-
 	cUser := s.User
+	if cUser == "" {
+		logCache.Debug("Parameter User is empty")
+	}
 
 	cPassword := s.Password
+	if cPassword == "" {
+		logCache.Debug("Parameter Password is empty")
+	}
 
+	cTLSEnabled := s.TLSEnabled
 	cTLS := s.TLS
-	if cTLS == "" {
-		return nil, errors.New("Required Parameter Model is missing")
+	if true == cTLSEnabled && cTLS == "" {
+		return nil, errors.New("Required Parameter TLS is missing")
 	}
 
 	cSchemaGen := s.SchemaGen
