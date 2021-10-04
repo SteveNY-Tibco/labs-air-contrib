@@ -69,7 +69,7 @@ func (this *DgraphFactory) NewManager(settings map[string]interface{}) (connecti
 		return nil, errors.New("Required Parameter Name is missing")
 	}
 
-	cDescription := s.Description
+	//	cDescription := s.Description
 
 	cApiVersion := s.ApiVersion
 	if cApiVersion == "" {
