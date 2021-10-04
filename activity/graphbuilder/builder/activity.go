@@ -83,7 +83,7 @@ func (a *Activity) Eval(context activity.Context) (done bool, err error) {
 		return false, err
 	}
 
-	if input.BatchEnd {
+	if false == a.batchMode && input.BatchEnd {
 
 		graphData := a.graphMgr.ExportGraph()
 		logCache.Debug("[BuilderActivity:Eval] Graph : ", graphData)
