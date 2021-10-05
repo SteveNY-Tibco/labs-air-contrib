@@ -11,7 +11,10 @@ import (
 	"sync"
 
 	"github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util"
+	"github.com/project-flogo/core/support/log"
 )
+
+var logger = log.ChildLogger(log.RootLogger(), "labs-graphbuilder")
 
 //-============================-//
 //     Define GraphBuilder
@@ -411,6 +414,12 @@ func (builder *GraphBuilder) Export(g *Graph, graphModel *GraphDefinition) map[s
 }
 
 func ReconstructGraph(graphData map[string]interface{}) Graph {
+
+	if logger.DebugEnabled() {
+		logger.Debug("[model.ReconstructGraph] graphData : ", graphData)
+		logger.Debug("[model.ReconstructGraph] graphData.modelId : ", graphData["modelId"])
+		logger.Debug("[model.ReconstructGraph] graphData.id : ", graphData["id"])
+	}
 
 	graph := NewGraphImpl(graphData["modelId"].(string), graphData["id"].(string))
 	graph.SetModel(graphData["model"].(map[string]interface{}))
