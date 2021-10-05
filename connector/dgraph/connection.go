@@ -19,7 +19,52 @@ import (
 var logCache = log.ChildLogger(log.RootLogger(), "Dgraph.connection")
 var factory = &DgraphFactory{}
 
-// Settings for postgres
+func NewSetting(settings map[string]interface{}) (*Settings, error) {
+	s := &Settings{}
+
+	var err = metadata.MapToStruct(settings, s, false)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if s.Name == "" {
+		return nil, errors.New("Required Parameter Name is missing")
+	}
+
+	//	cDescription := s.Description
+
+	if s.ApiVersion == "" {
+		return nil, errors.New("Required Parameter Model is missing")
+	}
+
+	if s.URL == "" {
+		return nil, errors.New("Required Parameter Metadata is missing")
+	}
+
+	if s.User == "" {
+		logCache.Debug("Parameter User is empty")
+	}
+
+	if s.Password == "" {
+		logCache.Debug("Parameter Password is empty")
+	}
+
+	if true == s.TLSEnabled && s.TLS == "" {
+		return nil, errors.New("Required Parameter TLS is missing")
+	}
+
+	if s.SchemaGen == "" {
+		return nil, errors.New("Required Parameter Metadata is missing")
+	}
+
+	if s.Schema == "" {
+		return nil, errors.New("Required Parameter Metadata is missing")
+	}
+	return s, nil
+}
+
+// Settings for dgraph
 type Settings struct {
 	Name        string `md:"name,required"`
 	Description string `md:"description"`
@@ -31,6 +76,49 @@ type Settings struct {
 	TLS         string `md:"tls,required"`
 	SchemaGen   string `md:"schemaGen,required"`
 	Schema      string `md:"schema,required"`
+}
+
+func (s *Settings) ToMap() map[string]interface{} {
+
+	properties := map[string]interface{}{
+		"name":        s.Name,
+		"description": s.Description,
+		"apiVersion":  s.ApiVersion,
+		"url":         s.URL,
+		"tlsEnabled":  s.TLSEnabled,
+		"user":        s.User,
+		"password":    s.Password,
+		"schemaGen":   s.SchemaGen,
+	}
+
+	if s.TLSEnabled {
+		if "" != s.TLS {
+			content, err := coerce.ToType(s.TLS, data.TypeObject)
+			if nil == err {
+				tlsBytes, err := b64.StdEncoding.DecodeString(strings.Split(content.(map[string]interface{})["content"].(string), ",")[1])
+				if nil == err {
+					properties["tls"] = string(tlsBytes)
+				}
+			}
+		}
+	}
+
+	if "file" == s.SchemaGen {
+		if "" != s.Schema {
+			content, err := coerce.ToType(s.Schema, data.TypeObject)
+			if nil == err {
+				schema := content.(map[string]interface{})
+				if nil != schema["content"] {
+					schemaBytes, err := b64.StdEncoding.DecodeString(strings.Split(schema["content"].(string), ",")[1])
+					if nil == err {
+						properties["schema"] = string(schemaBytes)
+					}
+				}
+			}
+		}
+	}
+
+	return properties
 }
 
 func init() {
@@ -56,101 +144,18 @@ func (this *DgraphFactory) Type() string {
 // NewManager DgraphFactory
 func (this *DgraphFactory) NewManager(settings map[string]interface{}) (connection.Manager, error) {
 
-	s := &Settings{}
-
-	var err = metadata.MapToStruct(settings, s, false)
+	s, err := NewSetting(settings)
 
 	if err != nil {
 		return nil, err
 	}
 
-	cName := s.Name
-	if cName == "" {
-		return nil, errors.New("Required Parameter Name is missing")
-	}
-
-	//	cDescription := s.Description
-
-	cApiVersion := s.ApiVersion
-	if cApiVersion == "" {
-		return nil, errors.New("Required Parameter Model is missing")
-	}
-
-	cURL := s.URL
-	if cURL == "" {
-		return nil, errors.New("Required Parameter Metadata is missing")
-	}
-
-	cUser := s.User
-	if cUser == "" {
-		logCache.Debug("Parameter User is empty")
-	}
-
-	cPassword := s.Password
-	if cPassword == "" {
-		logCache.Debug("Parameter Password is empty")
-	}
-
-	cTLSEnabled := s.TLSEnabled
-	cTLS := s.TLS
-	if true == cTLSEnabled && cTLS == "" {
-		return nil, errors.New("Required Parameter TLS is missing")
-	}
-
-	cSchemaGen := s.SchemaGen
-	if cSchemaGen == "" {
-		return nil, errors.New("Required Parameter Metadata is missing")
-	}
-
-	cSchema := s.Schema
-	if cSchema == "" {
-		return nil, errors.New("Required Parameter Metadata is missing")
-	}
-
-	properties := make(map[string]interface{})
-
-	properties["version"] = cApiVersion
-	properties["url"] = cURL
-	properties["user"] = cUser
-	properties["password"] = cPassword
-	properties["tlsEnabled"] = cTLSEnabled
-	if cTLSEnabled {
-		if "" != cTLS {
-			content, err := coerce.ToType(cTLS, data.TypeObject)
-			if nil == err {
-				tlsBytes, err := b64.StdEncoding.DecodeString(strings.Split(content.(map[string]interface{})["content"].(string), ",")[1])
-				if nil == err {
-					properties["tls"] = string(tlsBytes)
-				}
-			}
-		}
-	}
-
-	properties["schemaGen"] = cSchemaGen
-	if "file" == cSchemaGen {
-		if "" != cSchema {
-			content, err := coerce.ToType(cSchema, data.TypeObject)
-			if nil == err {
-				schema := content.(map[string]interface{})
-				if nil != schema["content"] {
-					schemaBytes, err := b64.StdEncoding.DecodeString(strings.Split(schema["content"].(string), ",")[1])
-					if nil == err {
-						properties["schema"] = string(schemaBytes)
-					}
-				}
-			}
-		}
-	}
-
+	properties := s.ToMap()
 	logCache.Debug("properties : ", properties)
 
 	sharedConn := &SharedDgraphManager{
-		name:       cName,
+		name:       s.Name,
 		properties: properties,
-	}
-
-	if nil != err {
-		return nil, err
 	}
 
 	return sharedConn, nil
@@ -170,6 +175,9 @@ func ReconstructGraph(graphData map[string]interface{}) model.Graph {
 func (this *SharedDgraphManager) Lookup(clientID string, properties map[string]interface{}) (dbservice.UpsertService, error) {
 	var err error
 	if nil == this.dgraphService {
+		for key, value := range this.properties {
+			properties[key] = value
+		}
 		this.dgraphService, err = services.NewDgraphService(properties)
 		logCache.Info("(DgraphServiceFactory.CreateUpsertService) upsertService : ", this.dgraphService)
 		if nil != err {
