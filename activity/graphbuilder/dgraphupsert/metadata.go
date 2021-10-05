@@ -8,7 +8,7 @@ import (
 type Settings struct {
 	DgraphConnection   connection.Manager `md:"dgraphConnection,required"`
 	CacheSize          int                `md:"cacheSize,required"`
-	ReadableExternalId int                `md:"readableExternalId,required"`
+	ReadableExternalId bool               `md:"readableExternalId,required"`
 	ExplicitType       bool               `md:"explicitType,required"`
 	TypeTag            string             `md:"typeTag,required"`
 	AttrWithPrefix     bool               `md:"attrWithPrefix,required"`
