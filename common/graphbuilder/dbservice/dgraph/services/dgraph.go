@@ -15,7 +15,9 @@ import (
 	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph"
 	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/api"
 
+	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/api/v1"
 	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/api/v2"
+	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/api/v200"
 	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/cache"
 	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/rdf"
 
@@ -100,10 +102,12 @@ func NewDgraphService(properties map[string]interface{}) (dbservice.UpsertServic
 	version := properties["version"].(string)
 	log.Info("(NewDgraphService) API Version : ", version)
 	switch version {
-	//	case "v1":
-	//		dgraphService._api, _ = v1.NewAPI(url, user, password, tlsEnabled, tlsUserCfg)
-	default:
+	case "v1":
+		dgraphService._api, _ = v1.NewAPI(url, user, password, tlsEnabled, tlsUserCfg)
+	case "v2":
 		dgraphService._api, _ = v2.NewAPI(url, user, password, tlsEnabled, tlsUserCfg)
+	default:
+		dgraphService._api, _ = v200.NewAPI(url, user, password, tlsEnabled, tlsUserCfg)
 	}
 
 	var err error
