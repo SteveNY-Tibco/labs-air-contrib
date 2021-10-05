@@ -51,7 +51,7 @@ func New(ctx activity.InitContext) (activity.Activity, error) {
 	sharedmanager := settings.DgraphConnection.(*dgraph.SharedDgraphManager)
 	act := &Activity{
 		dgraphMgr:          sharedmanager,
-		settings:           ctx.Settings(),
+		settings:           settings.ToMap(),
 		cacheSize:          settings.CacheSize,
 		readableExternalId: settings.ReadableExternalId,
 		explicitType:       settings.ExplicitType,

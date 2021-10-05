@@ -14,6 +14,16 @@ type Settings struct {
 	AttrWithPrefix     bool               `md:"attrWithPrefix,required"`
 }
 
+func (s *Settings) ToMap() map[string]interface{} {
+	return map[string]interface{}{
+		"cacheSize":          s.CacheSize,
+		"readableExternalId": s.ReadableExternalId,
+		"explicitType":       s.ExplicitType,
+		"typeTag":            s.TypeTag,
+		"addPrefixToAttr":    s.AttrWithPrefix,
+	}
+}
+
 // Input Structure
 type Input struct {
 	Graph interface{} `md:"Graph,required"`
