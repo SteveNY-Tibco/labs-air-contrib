@@ -83,7 +83,7 @@ func (s *Settings) ToMap() map[string]interface{} {
 	properties := map[string]interface{}{
 		"name":        s.Name,
 		"description": s.Description,
-		"apiVersion":  s.ApiVersion,
+		"version":     s.ApiVersion,
 		"url":         s.URL,
 		"tlsEnabled":  s.TLSEnabled,
 		"user":        s.User,

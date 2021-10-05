@@ -86,6 +86,7 @@ func (a *Activity) Eval(context activity.Context) (done bool, err error) {
 
 	logCache.Debug("(getDgraph) graph obj = ", graph)
 
+	a.settings["graphModel"] = graph.GetModel()
 	dgraphService, err := a.dgraphMgr.Lookup(context.Name(), a.settings)
 	err = dgraphService.UpsertGraph(graph, nil)
 
