@@ -82,7 +82,7 @@ func (a *Activity) Eval(context activity.Context) (done bool, err error) {
 
 	logCache.Debug("[BuilderActivity:Eval] Graph : ", input.Graph)
 
-	graph := dgraph.ReconstructGraph(input.Graph.(map[string]interface{}))
+	graph := dgraph.ReconstructGraph(input.Graph.(map[string]interface{})["graph"].(map[string]interface{}))
 
 	logCache.Debug("(getDgraph) graph obj = ", graph)
 
