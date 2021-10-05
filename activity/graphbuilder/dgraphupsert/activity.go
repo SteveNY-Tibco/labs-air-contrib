@@ -33,7 +33,7 @@ type Activity struct {
 	dgraphMgr          *dgraph.SharedDgraphManager
 	settings           map[string]interface{}
 	cacheSize          int
-	readableExternalId int
+	readableExternalId bool
 	explicitType       bool
 	typeTag            string
 	attrWithPrefix     bool
