@@ -19,12 +19,12 @@ github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAE
 github.com/OneOfOne/xxhash v1.2.5/go.mod h1:eZbhyaAYD41SGSSsnmcpxVoRiQ/MPUTjUdIIOT9Um7Q=
 github.com/Shopify/sarama v1.19.0/go.mod h1:FVkBWblsNy7DGZRfXLU0O9RCGt5g3g3yEuWXgklEdEo=
 github.com/Shopify/toxiproxy v2.1.4+incompatible/go.mod h1:OXgGpZ6Cli1/URJOF1DMxUHB2q5Ap20/P/eIdh4G0pI=
-github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20211005221327-51e6e1818269 h1:IpIq3156f3ZEYOJvoMZ3KCAeLlWos/e2o9Dy2pQ+A4c=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice v0.0.0-20211005221327-51e6e1818269 h1:vecdGjP8GN+w8+gCRSKlM5vHxH/ZsyJzaIX9cuw+lk0=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice v0.0.0-20211005221327-51e6e1818269/go.mod h1:IOfQZHG6tw8wI/0EyunmtD+LDJmVaR1vjyNnoS6txZE=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211005205220-50de06665877/go.mod h1:sTm8exVFx/1fA1DlYAqW21o4hEJHCxQmlXCTxJ+xPIE=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211006024312-4e8452b3a065 h1:o0PuTGZK94m/zolNVZx1qCyqWdxOLxfNNG8qsCI1P84=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211006024312-4e8452b3a065/go.mod h1:sTm8exVFx/1fA1DlYAqW21o4hEJHCxQmlXCTxJ+xPIE=
+github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20211006025505-824febeb0043 h1:40QUgvivemPLlPv++tvrLCM+7HPV0n1E43GrF8Rm4aA=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice v0.0.0-20211006025505-824febeb0043 h1:YHg0UlZ2DdGLz3WgXbaPhqW4QQhUPhf6rflT25RQi9I=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice v0.0.0-20211006025505-824febeb0043/go.mod h1:Qj4E6zPQrAXYaLLA/5FiVUYAs/oXkx9VExy4Iea/b5c=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211005221327-51e6e1818269/go.mod h1:sTm8exVFx/1fA1DlYAqW21o4hEJHCxQmlXCTxJ+xPIE=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211006025505-824febeb0043 h1:n++OFn55OUTiZRpJNCDyEaO2uXZRGfthMVPcumWByms=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211006025505-824febeb0043/go.mod h1:sTm8exVFx/1fA1DlYAqW21o4hEJHCxQmlXCTxJ+xPIE=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20210926000041-409e4db1e7fd h1:00DZsn8EzHMSTI+3kjv2SL3q/SUfsoaWBODNdrThLHo=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20210926000041-409e4db1e7fd/go.mod h1:z0zOf2VBBhxv3rx+oixwEvLJfCqZFrxOjMgxMzlXbGw=
 github.com/TIBCOSoftware/flogo-lib v0.5.8 h1:JX6PcxtyJbya++sKiWhFRADA6UnkSRS/INuTPzOMF0Y=
@@ -376,6 +376,7 @@ golang.org/x/sys v0.0.0-20190405154228-4b34438f7a67/go.mod h1:h1NjWce9XRLGQEsW7w
 golang.org/x/sys v0.0.0-20190412213103-97732733099d/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20190626221950-04f50cda93cb/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20190801041406-cbf593c0f2f3/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20191026070338-33540a1f6037 h1:YyJpGZS1sBuBCzLAR1VEpK193GlqGZbnPFnPV/5Rsb4=
 golang.org/x/sys v0.0.0-20191026070338-33540a1f6037/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20191210023423-ac6580df4449/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
