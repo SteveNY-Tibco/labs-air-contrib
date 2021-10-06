@@ -113,8 +113,11 @@ func NewDgraphService(properties map[string]interface{}) (dbservice.UpsertServic
 		log.Debug("[services.NewDgraphService] API version : v200")
 	}
 
-	var err error
-	if "no" != properties["schemaGen"] && nil != properties["graphModel"] {
+	err := dgraphService._api.EnsureConnection()
+	if nil != err {
+		log.Error("[services.NewDgraphService] Unable to connect to dgraph server.")
+		return nil, err
+	} else if "no" != properties["schemaGen"] && nil != properties["graphModel"] {
 		schema := buildSchema(
 			dgraphService._explicitType,
 			dgraphService._typeName,
@@ -128,12 +131,6 @@ func NewDgraphService(properties map[string]interface{}) (dbservice.UpsertServic
 		log.Debug("[services.NewDgraphService] ", schema)
 		log.Debug("[services.NewDgraphService] ***************************************************")
 		err = dgraphService._api.BuildSchema(schema)
-	} else {
-		err = dgraphService._api.EnsureConnection()
-	}
-
-	if nil != err {
-		dgraphService = nil
 	}
 
 	return dgraphService, err
