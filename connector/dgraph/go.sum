@@ -19,12 +19,12 @@ github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAE
 github.com/OneOfOne/xxhash v1.2.5/go.mod h1:eZbhyaAYD41SGSSsnmcpxVoRiQ/MPUTjUdIIOT9Um7Q=
 github.com/Shopify/sarama v1.19.0/go.mod h1:FVkBWblsNy7DGZRfXLU0O9RCGt5g3g3yEuWXgklEdEo=
 github.com/Shopify/toxiproxy v2.1.4+incompatible/go.mod h1:OXgGpZ6Cli1/URJOF1DMxUHB2q5Ap20/P/eIdh4G0pI=
-github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20211006150907-3ae18e0556ac h1:3qWpGG8xOCsDBVtDkrkwblpuDntnCZPm2X9jBTNLzto=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice v0.0.0-20211006150907-3ae18e0556ac h1:hN6ocn+moBaYOmKBtVHg+yp144JDEzpL3MYkCGSnPxc=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice v0.0.0-20211006150907-3ae18e0556ac/go.mod h1:hNWrU5wcQ7LeOj4YV1PL2rbLLequ7Bi1r40db8I1rEk=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211006025505-824febeb0043/go.mod h1:sTm8exVFx/1fA1DlYAqW21o4hEJHCxQmlXCTxJ+xPIE=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211006150907-3ae18e0556ac h1:31xnNCHaz1Aw+ywN8h8oCcArbykG9HmY4MhC1u4dr3g=
+github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20211006161937-cd0edc16a425 h1:gvAofbmP+Ja3k5mD3KljYdOoArzST9MuxRnkEYLNTqA=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice v0.0.0-20211006161937-cd0edc16a425 h1:jbS54ZKZ3lGpo8isfL9CEOvHvL/I6dgJwg2M9Sl/T/Y=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice v0.0.0-20211006161937-cd0edc16a425/go.mod h1:w7t0JE2OjKMgFm/6IF/YgGcd3mW6tfjMXGKFBNVBCn4=
 github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211006150907-3ae18e0556ac/go.mod h1:sTm8exVFx/1fA1DlYAqW21o4hEJHCxQmlXCTxJ+xPIE=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211006161937-cd0edc16a425 h1:h767/R9txzWI3p1Mu6V0nTg/iLjmPaFMt/PMa3cQIS4=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211006161937-cd0edc16a425/go.mod h1:sTm8exVFx/1fA1DlYAqW21o4hEJHCxQmlXCTxJ+xPIE=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20210926000041-409e4db1e7fd h1:00DZsn8EzHMSTI+3kjv2SL3q/SUfsoaWBODNdrThLHo=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20210926000041-409e4db1e7fd/go.mod h1:z0zOf2VBBhxv3rx+oixwEvLJfCqZFrxOjMgxMzlXbGw=
 github.com/TIBCOSoftware/flogo-lib v0.5.8 h1:JX6PcxtyJbya++sKiWhFRADA6UnkSRS/INuTPzOMF0Y=
@@ -70,7 +70,6 @@ github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSs
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/dgraph-io/badger/v2 v2.2007.3-0.20200927102853-5e3d4b9926a7 h1:LwkchghZvVkSBWVxkcFepcD23PXykr5yTOOCH6eSPcY=
 github.com/dgraph-io/badger/v2 v2.2007.3-0.20200927102853-5e3d4b9926a7/go.mod h1:26P/7fbL4kUZVEVKLAKXkBXKOydDmM2p1e+NhhnBCAE=
-github.com/dgraph-io/dgo v1.0.0 h1:DRuI66G+j0XWDOXly4v5PSk2dGkbIopAZIirRjq7lzI=
 github.com/dgraph-io/dgo/v2 v2.1.1-0.20191127085444-c7a02678e8a6 h1:5leDFqGys055YO3TbghBhk/QdRPEwyLPdgsSJfiR20I=
 github.com/dgraph-io/dgo/v2 v2.1.1-0.20191127085444-c7a02678e8a6/go.mod h1:LJCkLxm5fUMcU+yb8gHFjHt7ChgNuz3YnQQ6MQkmscI=
 github.com/dgraph-io/dgo/v200 v200.0.0-20210401091508-95bfd74de60e h1:kdH2yqGYUl5xJARdI5kN1fjhVUV2sLC+vL1CVXhcAfo=
@@ -374,7 +373,6 @@ golang.org/x/sys v0.0.0-20190405154228-4b34438f7a67/go.mod h1:h1NjWce9XRLGQEsW7w
 golang.org/x/sys v0.0.0-20190412213103-97732733099d/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20190626221950-04f50cda93cb/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20190801041406-cbf593c0f2f3/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
-golang.org/x/sys v0.0.0-20191026070338-33540a1f6037 h1:YyJpGZS1sBuBCzLAR1VEpK193GlqGZbnPFnPV/5Rsb4=
 golang.org/x/sys v0.0.0-20191026070338-33540a1f6037/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20191210023423-ac6580df4449/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
