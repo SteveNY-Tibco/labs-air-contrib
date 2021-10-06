@@ -100,14 +100,17 @@ func NewDgraphService(properties map[string]interface{}) (dbservice.UpsertServic
 	}
 
 	version := properties["version"].(string)
-	log.Info("(NewDgraphService) API Version : ", version)
+	log.Info("[services.NewDgraphService] API Version : ", version)
 	switch version {
 	case "v1":
 		dgraphService._api, _ = v1.NewAPI(url, user, password, tlsEnabled, tlsUserCfg)
+		log.Debug("[services.NewDgraphService] API version : v1")
 	case "v2":
 		dgraphService._api, _ = v2.NewAPI(url, user, password, tlsEnabled, tlsUserCfg)
+		log.Debug("[services.NewDgraphService] API version : v2")
 	default:
 		dgraphService._api, _ = v200.NewAPI(url, user, password, tlsEnabled, tlsUserCfg)
+		log.Debug("[services.NewDgraphService] API version : v200")
 	}
 
 	var err error
@@ -121,9 +124,9 @@ func NewDgraphService(properties map[string]interface{}) (dbservice.UpsertServic
 			properties["schema"],
 			properties["graphModel"].(map[string]interface{}),
 		)
-		fmt.Println("***************** schema query ********************")
-		fmt.Println(schema)
-		fmt.Println("***************************************************")
+		log.Debug("[services.NewDgraphService] ***************** schema query ********************")
+		log.Debug("[services.NewDgraphService] ", schema)
+		log.Debug("[services.NewDgraphService] ***************************************************")
 		err = dgraphService._api.BuildSchema(schema)
 	} else {
 		err = dgraphService._api.EnsureConnection()
@@ -179,20 +182,20 @@ func (this *DgraphService) Query(query string) (interface{}, error) {
 
 func (this *DgraphService) UpsertGraph(graph model.Graph, graphToo map[string]interface{}) error {
 
-	log.Debug("(UpsertGraph) begin - graph = ", graph)
+	log.Debug("[services.DgraphService.UpsertGraph] begin - graph = ", graph)
 
-	log.Debug("graph.GetNodes() = ", graph.GetNodes())
+	log.Debug("[services.DgraphService.UpsertGraph] graph.GetNodes() = ", graph.GetNodes())
 
 	pendingNodes := make(map[string]*rdf.DNode)
 	for id, node := range graph.GetNodes() {
-		log.Debug("node id = ", id, ", node = ", node)
+		log.Debug("[services.DgraphService.UpsertGraph] node id = ", id, ", node = ", node)
 		pendingNodes[id.ToString()] = rdf.NewDNode(node, this._explicitType, this._typeName, this._addPrefixToAttr)
 	}
 
-	log.Debug("graph.GetEdges() = ", graph.GetEdges())
+	log.Debug("[services.DgraphService.UpsertGraph] graph.GetEdges() = ", graph.GetEdges())
 	pendingEdges := make(map[string]*rdf.DEdge)
 	for id, edge := range graph.GetEdges() {
-		log.Debug("edge id = ", id, ", edge = ", edge)
+		log.Debug("[services.DgraphService.UpsertGraph] edge id = ", id, ", edge = ", edge)
 		from := pendingNodes[edge.GetFromId().ToString()]
 		to := pendingNodes[edge.GetToId().ToString()]
 		pendingEdges[id.ToString()] = rdf.NewDEdge(edge, this._explicitType, this._typeName, this._addPrefixToAttr, from, to)
@@ -200,7 +203,7 @@ func (this *DgraphService) UpsertGraph(graph model.Graph, graphToo map[string]in
 
 	err := this.Commit(pendingNodes, pendingEdges, graph)
 
-	log.Debug("(UpsertGraph) Done ! ")
+	log.Debug("[services.DgraphService.UpsertGraph]  Done ! ")
 
 	return err
 }
@@ -214,19 +217,19 @@ func (this *DgraphService) Commit(
 	this._mux.Lock()
 	defer this._mux.Unlock()
 
-	log.Debug("(Commit) begin - ", graph)
+	log.Debug("[services.DgraphService.Commit] begin - ", graph)
 
 	txn := this._api.NewTransaction()
 	defer txn.Discard()
 
 	for id, dEdge := range pendingEdges {
-		log.Debug("XXXXXXXXXXXXXXX edge id : ", dEdge.GetId())
+		log.Debug("[services.DgraphService.Commit] XXXXXXXXXXXXXXX edge id : ", dEdge.GetId())
 		cachedEdge := this._cachedEdges.Get(id)
 
-		log.Debug("newEdge = ", dEdge, ", cached edge = ", cachedEdge)
+		log.Debug("[services.DgraphService.Commit] newEdge = ", dEdge, ", cached edge = ", cachedEdge)
 
 		if nil == cachedEdge {
-			log.Debug("(commit) edge NOT in cache, eid = ", id)
+			log.Debug("[services.DgraphService.Commit] edge NOT in cache, eid = ", id)
 
 			/* edge not found in cache */
 			/* check exists from remote server */
@@ -260,10 +263,10 @@ func (this *DgraphService) Commit(
 				}
 			}
 		} else {
-			log.Debug("(commit) edge FOUND in cache, eid = ", id)
+			log.Debug("[services.DgraphService.Commit] edge FOUND in cache, eid = ", id)
 			edgeChanged, err := cachedEdge.(*rdf.DEdge).Update(dEdge.GetEdge())
 			if nil != err {
-				log.Error("Error : ", err)
+				log.Error("[services.DgraphService.Commit] Error : ", err)
 				return err
 			}
 			if !edgeChanged {
@@ -277,25 +280,25 @@ func (this *DgraphService) Commit(
 	var Nquads bytes.Buffer
 	for id, dNode := range pendingNodes {
 		if !dNode.Exists() {
-			log.Info("(commit) node has NO UID ! nid = ", id)
+			log.Info("[services.DgraphService.Commit] node has NO UID ! nid = ", id)
 			cachedNode := this._cachedNodes.Get(id)
 
-			log.Info("newNode = ", dNode, ", cached node = ", cachedNode)
+			log.Info("[services.Commit] newNode = ", dNode, ", cached node = ", cachedNode)
 
 			if nil == cachedNode || "" == cachedNode.(*rdf.DNode).GetUid() {
-				log.Debug("(commit) node NOT in cache or cached node has no UID !")
+				log.Debug("[services.DgraphService.Commit] node NOT in cache or cached node has no UID !")
 				err := this.checkNode(txn, graph, dNode)
 				if nil != err {
-					log.Error("Error from checkNode : ", err)
+					log.Error("[services.Commit] Error from checkNode : ", err)
 					return err
 				}
 				/* Add to cache */
 				this._cachedNodes.Add(id, dNode)
 			} else {
-				log.Debug("(commit) node FOUND in cache !")
+				log.Debug("[services.DgraphService.Commit] node FOUND in cache !")
 				nodeChanged, err := cachedNode.(*rdf.DNode).Update(dNode.GetNode())
 				if nil != err {
-					log.Error("Error : ", err)
+					log.Error("[services.Commit] Error : ", err)
 					return err
 				}
 				dNode.SetUid(cachedNode.(*rdf.DNode).GetUid())
@@ -306,7 +309,7 @@ func (this *DgraphService) Commit(
 				}
 			}
 		} else {
-			log.Debug("(commit) node has UID ! nid = ", id)
+			log.Debug("[services.DgraphService.Commit] node has UID ! nid = ", id)
 		}
 
 		for _, data := range dNode.ToRDF(graph, dgraph.DATE_TIME_SAMPLE, this._readableExternalId) {
@@ -325,7 +328,7 @@ func (this *DgraphService) Commit(
 	log.Info("=====================================================================")
 
 	if 0 == Nquads.Len() {
-		log.Debug("(DgraphService::Commit) No data commited !!")
+		log.Debug("[services.DgraphService.Commit] No data commited !!")
 		return nil
 	}
 
@@ -340,11 +343,11 @@ func (this *DgraphService) Commit(
 	/* Since it's local data structure, why delete? */
 	if nil != err {
 		/* keep all pending entities */
-		log.Error("(Commit) Fail with error : ", err)
+		log.Error("[services.DgraphService.Commit] Fail with error : ", err)
 		return err
 	}
 
-	log.Debug("(Commit) Done ! ")
+	log.Debug("[services.Commit] Done ! ")
 
 	return nil
 }
@@ -380,28 +383,28 @@ func (this *DgraphService) checkNode(txn api.Transaction, graph model.Graph, nod
 	query.WriteString("  }\n")
 	query.WriteString("}\n")
 
-	log.Info("************** query node ****************")
-	log.Info(query.String())
-	log.Info("******************************************")
+	log.Info("[services.DgraphService.checkNode] ************** query node ****************")
+	log.Info("[services.DgraphService.checkNode] ", query.String())
+	log.Info("[services.DgraphService.checkNode] ******************************************")
 
 	targetNodeData, err := txn.QueryWithVars(query.String(), make(map[string]string))
 	if nil != err {
 		return err
 	}
 
-	log.Debug("Trying to find node : ", node.ToString())
+	log.Debug("[services.DgraphService.checkNode] Trying to find node : ", node.ToString())
 	nodeArray := targetNodeData["node"].([]interface{})
 	if nil != nodeArray && 0 < len(nodeArray) {
 
 		if 1 < len(nodeArray) {
-			log.Warnf("%s is found duplicated ! \n", node.ToString())
+			log.Warnf("[services.DgraphService.checkNode] %s is found duplicated ! \n", node.ToString())
 		}
 
 		node.SetUid(nodeArray[0].(map[string]interface{})["uid"].(string))
 	}
 
 	if !node.Exists() {
-		log.Debugf("Node is not found : %s \n", node.ToString())
+		log.Debugf("[services.DgraphService.checkNode] Node is not found : %s \n", node.ToString())
 	}
 
 	return nil
@@ -483,22 +486,22 @@ func (this *DgraphService) checkEdge(txn api.Transaction, graph model.Graph, edg
 	query.WriteString("    }\n  ")
 	query.WriteString("  }\n  ")
 
-	log.Info("************** query edge ****************")
-	log.Info(query.String())
-	log.Info("******************************************")
+	log.Info("[services.DgraphService.checkEdge] ************** query edge ****************")
+	log.Info("[services.DgraphService.checkEdge] ", query.String())
+	log.Info("[services.DgraphService.checkEdge] ******************************************")
 
 	targetEdgeData, err := txn.QueryWithVars(query.String(), make(map[string]string))
 	if nil != err {
 		return err
 	}
 
-	log.Debug("Trying to find edge : ", edge.ToString())
+	log.Debug("[services.DgraphService.checkEdge] Trying to find edge : ", edge.ToString())
 
 	edgeArray := targetEdgeData["edge"].([]interface{})
 	if nil != edgeArray && 0 < len(edgeArray) {
 
 		if 1 < len(edgeArray) {
-			log.Warnf("%s is found duplicated !\n", edge.ToString())
+			log.Warnf("[services.DgraphService.checkEdge] %s is found duplicated !\n", edge.ToString())
 		}
 
 		fromObj := edgeArray[0].(map[string]interface{})
@@ -526,15 +529,15 @@ func (this *DgraphService) checkEdge(txn api.Transaction, graph model.Graph, edg
 		}
 
 		if !edge.GetFrom().Exists() {
-			log.Warn("From node is not found !")
+			log.Warn("[services.DgraphService.checkEdge] From node is not found !")
 		}
 
 		if !edge.GetTo().Exists() {
-			log.Warn("To node is not found !")
+			log.Warn("[services.DgraphService.checkEdge] To node is not found !")
 		}
 
 	} else {
-		log.Debug("Edge not found !")
+		log.Debug("[services.DgraphService.checkEdge] Edge not found !")
 	}
 
 	return nil
