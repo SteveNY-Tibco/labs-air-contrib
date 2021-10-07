@@ -19,12 +19,12 @@ github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAE
 github.com/OneOfOne/xxhash v1.2.5/go.mod h1:eZbhyaAYD41SGSSsnmcpxVoRiQ/MPUTjUdIIOT9Um7Q=
 github.com/Shopify/sarama v1.19.0/go.mod h1:FVkBWblsNy7DGZRfXLU0O9RCGt5g3g3yEuWXgklEdEo=
 github.com/Shopify/toxiproxy v2.1.4+incompatible/go.mod h1:OXgGpZ6Cli1/URJOF1DMxUHB2q5Ap20/P/eIdh4G0pI=
-github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20211006230834-effafe184026 h1:zw2oXjfT5+fzDGVpBcFJ/yjGY88RRJuRkeh9t4xu+dY=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice v0.0.0-20211006230834-effafe184026 h1:EOB17gVUczOCClyB6Panlly76QCRHHLKngqLRs9o8WY=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice v0.0.0-20211006230834-effafe184026/go.mod h1:mEuLLmBCoce8EcwtXmKVwJVB1T6R+h7vZw7ybW7E8wo=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211006182410-78f7f5be994e/go.mod h1:sTm8exVFx/1fA1DlYAqW21o4hEJHCxQmlXCTxJ+xPIE=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211006230834-effafe184026 h1:0e8BTyUrKMUJs+MGiO/JNUwgVJ8zuSvbhHM8Vhqv+Bc=
+github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20211007013435-04c5d063eef7 h1:+kKEtKY4UnHxBq5IqQE9NoPZj7HS8ucowH1YwS8yX5U=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice v0.0.0-20211007013435-04c5d063eef7 h1:tdP4oFeUNeypsiAqNIGVvMmG9fjmvTE0ZWirdZQeg98=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice v0.0.0-20211007013435-04c5d063eef7/go.mod h1:J4KnItaCRufGiQvCYe5IVpK/pLj+7yFFxc5UZENoWvE=
 github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211006230834-effafe184026/go.mod h1:sTm8exVFx/1fA1DlYAqW21o4hEJHCxQmlXCTxJ+xPIE=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211007013435-04c5d063eef7 h1:Gvtj+/mV9rMYqHcED/yoXCzKgMdr/5H/isAHBqhE7dM=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211007013435-04c5d063eef7/go.mod h1:sTm8exVFx/1fA1DlYAqW21o4hEJHCxQmlXCTxJ+xPIE=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20210926000041-409e4db1e7fd h1:00DZsn8EzHMSTI+3kjv2SL3q/SUfsoaWBODNdrThLHo=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20210926000041-409e4db1e7fd/go.mod h1:z0zOf2VBBhxv3rx+oixwEvLJfCqZFrxOjMgxMzlXbGw=
 github.com/TIBCOSoftware/flogo-lib v0.5.8 h1:JX6PcxtyJbya++sKiWhFRADA6UnkSRS/INuTPzOMF0Y=
