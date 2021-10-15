@@ -4,11 +4,11 @@ github.com/DataDog/zstd v1.4.5/go.mod h1:1jcaCB/ufaK+sKp1NBhlGmpz41jOoPQ35bpF36t
 github.com/Shopify/sarama v1.22.0/go.mod h1:lm3THZ8reqBDBQKQyb5HB3sY1lKp3grEbQ81aWSgPp4=
 github.com/Shopify/sarama v1.26.1/go.mod h1:NbSGBSSndYaIhRcBtY9V0U7AyH+x71bG668AuWys/yU=
 github.com/Shopify/toxiproxy v2.1.4+incompatible/go.mod h1:OXgGpZ6Cli1/URJOF1DMxUHB2q5Ap20/P/eIdh4G0pI=
-github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20210930140503-5352b4b6b952 h1:Tl4bcZTfSt/w90RhwVsh7ls+UmCx0R+FWUWwa5RVTLQ=
-github.com/SteveNY-Tibco/labs-air-contrib/common/notification v0.0.0-20210930140503-5352b4b6b952 h1:vS7hsPlCRUesYRnKBQCFd/Y8hwnpBxWKsiq6wmyT1c0=
-github.com/SteveNY-Tibco/labs-air-contrib/common/notification v0.0.0-20210930140503-5352b4b6b952/go.mod h1:7TSBKTTBm3XYskfac3qIctQhDcaubvxeuYg0bmVc624=
-github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20210930140503-5352b4b6b952 h1:Gxv4GCZMJCI2/ycGak3uIExXHBG3iXp5WnGVldOBBg0=
-github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20210930140503-5352b4b6b952/go.mod h1:VAikJUvmR0/oA7dkGWOnZVf5ayzv/VLhvJ6WZFNp2X4=
+github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20211013194857-81a7c4fbd920 h1:GVz1fq+OMmLGtXMzJSULA5tqr7NGC1KkZky7McjPum8=
+github.com/SteveNY-Tibco/labs-air-contrib/common/notification v0.0.0-20211013194857-81a7c4fbd920 h1:+HHFF/BwCB3S/roJZH4/9myOpIg/AHC/CVG/qvSoUTU=
+github.com/SteveNY-Tibco/labs-air-contrib/common/notification v0.0.0-20211013194857-81a7c4fbd920/go.mod h1:7TSBKTTBm3XYskfac3qIctQhDcaubvxeuYg0bmVc624=
+github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211013194857-81a7c4fbd920 h1:C2s25gl68vbwVjtipLwih9sqqYCa/TES+oGmFc5UgPU=
+github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211013194857-81a7c4fbd920/go.mod h1:VAikJUvmR0/oA7dkGWOnZVf5ayzv/VLhvJ6WZFNp2X4=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib v0.0.0-20210926000041-409e4db1e7fd h1:mFTuf5nMtZ/VnOqgqrCpp7lBaJ3TcHrmeFBzSS5tR0s=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/keywordreplace v0.0.0-20210926000041-409e4db1e7fd h1:AiuYmZv0obAtH72j6wBCd/Az811a3RLRBreYP/LWvhw=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/keywordreplace v0.0.0-20210926000041-409e4db1e7fd/go.mod h1:AuP9J9m+Jzf+wY6WkKPWn3569Y7YBOnwCEFJJ7WZQjA=

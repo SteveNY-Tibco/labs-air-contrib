@@ -28,5 +28,9 @@ func (fnObject2Json) Eval(params ...interface{}) (interface{}, error) {
 	if nil == object {
 		return "{}", nil
 	}
-	return json.Marshal(object)
+	jsonStr, err := json.Marshal(object)
+	if nil != err {
+		return "", err
+	}
+	return string(jsonStr), nil
 }
