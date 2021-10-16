@@ -485,7 +485,7 @@
             "args": [
                 {
                     "name": "obj",
-                    "type": "object"
+                    "type": "any"
                 }
             ],
             "return": {

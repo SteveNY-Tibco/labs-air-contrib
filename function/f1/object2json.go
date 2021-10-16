@@ -19,7 +19,7 @@ func (fnObject2Json) Name() string {
 }
 
 func (fnObject2Json) Sig() (paramTypes []data.Type, isVariadic bool) {
-	return []data.Type{data.TypeObject}, false
+	return []data.Type{data.TypeAny}, false
 }
 
 func (fnObject2Json) Eval(params ...interface{}) (interface{}, error) {
