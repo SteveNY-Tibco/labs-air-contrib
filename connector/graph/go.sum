@@ -1,9 +1,9 @@
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20211018155429-9e258b9ff5d5 h1:vvb1fh9HitR0mylZ5bRO1cDz4iYD/i44go7DCmdGmW4=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211018155429-9e258b9ff5d5 h1:yKw1od+J8dUJvoTWVHiaSXhlrdL7DVhjjQJk4KSIdas=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211018155429-9e258b9ff5d5/go.mod h1:++eZMqNOrc7xu44HVcpmSp/aWO7kEfo3q2oXLTSFVak=
-github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20211016004150-2faf3e4c8f47 h1:0jLo7CZSUSp/qBWz7BzT/RgoT6MlmtUPZg2ZDOI8xa4=
-github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20211016004150-2faf3e4c8f47/go.mod h1:z0zOf2VBBhxv3rx+oixwEvLJfCqZFrxOjMgxMzlXbGw=
+github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20211018201218-10ea5ba1f5c0 h1:rbQta88sxeZ3xrRxrODMv1qHO/cteTMUe8NjGMAqzGI=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211018201218-10ea5ba1f5c0 h1:BzbnTDmuRuxXGXasTQF7+jFwpiExJ4LkZv1k3bM/xGw=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211018201218-10ea5ba1f5c0/go.mod h1:oDiC9ffagpkZ/Crffdtbjw4DzJt+DmMNnwThdmypBIM=
+github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20211018154832-c4afcca164f9 h1:LTbd1uvQVQP8U3NCS0EQki36yR2+4WH3ERFAKGhJtm8=
+github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20211018154832-c4afcca164f9/go.mod h1:z0zOf2VBBhxv3rx+oixwEvLJfCqZFrxOjMgxMzlXbGw=
 github.com/TIBCOSoftware/flogo-lib v0.5.8 h1:JX6PcxtyJbya++sKiWhFRADA6UnkSRS/INuTPzOMF0Y=
 github.com/TIBCOSoftware/flogo-lib v0.5.8/go.mod h1:AE7tfFBvQNemM61frHCwTJYBWC9+iXohXyqrApe6xj4=
 github.com/araddon/dateparse v0.0.0-20190622164848-0fb0a474d195 h1:c4mLfegoDw6OhSJXTd2jUEQgZUQuJWtocudb97Qn9EM=
