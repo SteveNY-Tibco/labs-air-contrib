@@ -1,9 +1,9 @@
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20210927170241-e8a7233970e9 h1:jG4AAMIpzKhJCQIwrhyuApQ1wj74tfENFs4LkhvPE4I=
+github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20211016011208-9d823b5916ba h1:h8elcd4QrU38r9Tw4JczG+fQDQqGax6qFGhKMoTQ7Kg=
 github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20210926013353-4e9447737914 h1:NN44WoSrQI7pQEkMYxU3Dt9Xye0OPEUiiPKjBz2v+/4=
 github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20210926013353-4e9447737914/go.mod h1:3h/vIFz4bGAbtAZmpsjUz4ANRE53ven39oJva7jhCJ0=
-github.com/SteveNY-Tibco/labs-air-contrib/connector/graph v0.0.0-20210927170241-e8a7233970e9 h1:nbbVnkb9pLQ2CXb44s3yFVPaSfwKMbpjFRQ3BpYyZTM=
-github.com/SteveNY-Tibco/labs-air-contrib/connector/graph v0.0.0-20210927170241-e8a7233970e9/go.mod h1:sFfTlWRuUviXXe6PhOhhKi0nGYV+vyB4/Du/cKgPI/k=
+github.com/SteveNY-Tibco/labs-air-contrib/connector/graph v0.0.0-20211016011208-9d823b5916ba h1:FcseLXRBgsVuNYoXuvU2U0YFaklv/UZj0CnGGtHjMn8=
+github.com/SteveNY-Tibco/labs-air-contrib/connector/graph v0.0.0-20211016011208-9d823b5916ba/go.mod h1:sFfTlWRuUviXXe6PhOhhKi0nGYV+vyB4/Du/cKgPI/k=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20210926000041-409e4db1e7fd h1:00DZsn8EzHMSTI+3kjv2SL3q/SUfsoaWBODNdrThLHo=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20210926000041-409e4db1e7fd/go.mod h1:z0zOf2VBBhxv3rx+oixwEvLJfCqZFrxOjMgxMzlXbGw=
 github.com/TIBCOSoftware/flogo-lib v0.5.8 h1:JX6PcxtyJbya++sKiWhFRADA6UnkSRS/INuTPzOMF0Y=
