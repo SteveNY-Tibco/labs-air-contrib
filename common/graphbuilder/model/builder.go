@@ -150,7 +150,7 @@ func (builder *GraphBuilder) BuildGraphLegacy(
 			if nodesValid {
 				for nodeConfKey, node := range nodes {
 
-					//					fmt.Println("nodekey before = ", nodekey)
+					logger.Debug("nodeType before = ", nodeConfKey)
 					var nodeType string
 					checkPos := strings.LastIndex(nodeConfKey, "_")
 					if 0 <= checkPos && util.IsInteger(nodeConfKey[checkPos+1:len(nodeConfKey)]) {
@@ -158,7 +158,7 @@ func (builder *GraphBuilder) BuildGraphLegacy(
 					} else {
 						nodeType = nodeConfKey
 					}
-					//					fmt.Println("nodekey after = " + nodekey)
+					logger.Debug("nodeType after = " + nodeConfKey)
 
 					var attrs map[string]interface{}
 					attrWrapper, attrWrapperValid := node.([]interface{})
@@ -334,6 +334,7 @@ func (builder *GraphBuilder) buildVerexes(
 
 	logger.Debug("[GraphBuilder:BuildVertices] fromNodeConfKey = ", fromNodeConfKey, ", toNodeConfKey = ", toNodeConfKey)
 	logger.Debug("[GraphBuilder:BuildVertices] graph = ", graph)
+	logger.Debug("[GraphBuilder:BuildVertices] nodeMap = ", nodeMap)
 	logger.Debug("[GraphBuilder:BuildVertices] edgeModel._fromNodeType = ", edgeModel._fromNodeType, ", edgeModel._toNodeType = ", edgeModel._toNodeType)
 
 	if nil != fromNodeConfKey {
