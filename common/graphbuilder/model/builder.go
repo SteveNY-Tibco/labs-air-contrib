@@ -339,7 +339,7 @@ func (builder *GraphBuilder) buildVerexes(
 
 	if nil != fromNodeConfKey {
 		fromNodes = make(map[NodeId]*Node)
-		fromNode := nodeMap[fromNodeConfKey.(string)]
+		fromNode := nodeMap[edgeModel._fromNodeType]
 		fromNodes[fromNode.NodeId] = fromNode
 	} else {
 		fromNodes = (*graph).GetNodesByType(edgeModel._fromNodeType)
@@ -347,7 +347,7 @@ func (builder *GraphBuilder) buildVerexes(
 
 	if nil != toNodeConfKey {
 		toNodes = make(map[NodeId]*Node)
-		toNode := nodeMap[toNodeConfKey.(string)]
+		toNode := nodeMap[edgeModel._toNodeType]
 		toNodes[toNode.NodeId] = toNode
 	} else {
 		toNodes = (*graph).GetNodesByType(edgeModel._toNodeType)
