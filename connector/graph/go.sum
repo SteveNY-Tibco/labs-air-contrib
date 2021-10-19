@@ -1,7 +1,7 @@
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20211018205258-47e01e0d97b6 h1:m7ZrDXVkMaqcSW2S1IC40XPh3XuURGscwZUnI8uqnf0=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211018205258-47e01e0d97b6 h1:RjCBoW2IuwghGYyHRYal7gfskBOk7J3oXKfCbxcB6ls=
-github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211018205258-47e01e0d97b6/go.mod h1:oDiC9ffagpkZ/Crffdtbjw4DzJt+DmMNnwThdmypBIM=
+github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20211018234238-b2947f393e0d h1:roDgMG7iReP6kVHEJEcyiIESaMacQ0BIQFSrzRNTgJg=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211018234238-b2947f393e0d h1:PyWRyvyUxsBzhMq44zs/M/TXut6nzqKH7sKJG/tRNDA=
+github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/model v0.0.0-20211018234238-b2947f393e0d/go.mod h1:oDiC9ffagpkZ/Crffdtbjw4DzJt+DmMNnwThdmypBIM=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20211018154832-c4afcca164f9 h1:LTbd1uvQVQP8U3NCS0EQki36yR2+4WH3ERFAKGhJtm8=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20211018154832-c4afcca164f9/go.mod h1:z0zOf2VBBhxv3rx+oixwEvLJfCqZFrxOjMgxMzlXbGw=
 github.com/TIBCOSoftware/flogo-lib v0.5.8 h1:JX6PcxtyJbya++sKiWhFRADA6UnkSRS/INuTPzOMF0Y=
