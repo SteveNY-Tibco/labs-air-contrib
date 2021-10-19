@@ -188,7 +188,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	if params := input.TopicParams; len(params) > 0 {
 		topic = a.topic.String(params)
 	}
-	ctx.Logger().Infof("MQTT client publishing, client id : %s", a.settings.Id)
+	ctx.Logger().Infof("MQTT client publishing, client id : %s, msg : %s", a.settings.Id, input.Message)
 	if token := a.client.Publish(topic, byte(a.settings.Qos), a.settings.Retain, input.Message); token.Wait() && token.Error() != nil {
 		ctx.Logger().Errorf("Error in publishing: %v", err)
 		return true, token.Error()
