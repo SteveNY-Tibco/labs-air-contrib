@@ -381,6 +381,20 @@
             }
         },
         {
+            "name": "isnumber",
+            "description": "Returns true : the input type string is a type of a number",
+            "example": "f1.isnumber('Int64') => true",
+            "args": [
+                {
+                    "name": "str",
+                    "type": "string"
+                }
+            ],
+            "return": {
+                "type": "boolean"
+            }
+        },
+        {
             "name": "isnull",
             "description": "Returns true : the input object is null ",
             "example": "f1.isnull(<null object>) => true",
