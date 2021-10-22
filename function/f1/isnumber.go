@@ -49,6 +49,8 @@ func (fnIsNumber) Eval(params ...interface{}) (interface{}, error) {
 		return true, nil
 	case "Uint64":
 		return true, nil
+	case "Float32":
+		return true, nil
 	case "Float64":
 		return true, nil
 	}
