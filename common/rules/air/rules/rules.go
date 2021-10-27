@@ -120,7 +120,7 @@ func CompareValuesCond(ruleName string, condName string, tuples map[model.TupleT
 			log.Debug("parse data error: ", err.Error())
 		}
 
-		log.Debug("isNumeric: ", isNumeric, ", error: ", err.Error())
+		log.Debug("isNumeric: ", isNumeric)
 
 		log.Debug("condCtx.CompareNewMetricToValue: ", condCtx.CompareNewMetricToValue, ", condCtx.CompareNewMetricToLastMetric: ", condCtx.CompareNewMetricToLastMetric, ", condCtx.CompareLastMetricToValue: ", condCtx.CompareLastMetricToValue)
 
