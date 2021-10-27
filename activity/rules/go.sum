@@ -8,6 +8,10 @@ github.com/SteveNY-Tibco/labs-air-contrib/common/notification v0.0.0-20211027195
 github.com/SteveNY-Tibco/labs-air-contrib/common/notification v0.0.0-20211027195938-ff9ac98e153d/go.mod h1:7TSBKTTBm3XYskfac3qIctQhDcaubvxeuYg0bmVc624=
 github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027205553-af9db5ce3c61 h1:0iPi84jdOPUzb/0EfmRm1I5nIqNuo+OKW01xlc7LPFs=
 github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027205553-af9db5ce3c61/go.mod h1:VAikJUvmR0/oA7dkGWOnZVf5ayzv/VLhvJ6WZFNp2X4=
+github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027211620-325dba0190b3 h1:qGwMriLMnnmLNM7Bg/Vv0ftpLKva7YW6YsKkT4s3TrE=
+github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027211620-325dba0190b3/go.mod h1:VAikJUvmR0/oA7dkGWOnZVf5ayzv/VLhvJ6WZFNp2X4=
+github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027214420-9f340b49ab1a h1:X70qhHDsUve3brltoBM+h8KidGHD9bZAwS5F7XwSqMo=
+github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027214420-9f340b49ab1a/go.mod h1:VAikJUvmR0/oA7dkGWOnZVf5ayzv/VLhvJ6WZFNp2X4=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/keywordreplace v0.0.0-20211027015841-ccf26dbc99fa h1:xKBhg1swsR2y34OWIL5GZShKYkvDPhNYY+ai1E1MJFI=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/keywordreplace v0.0.0-20211027015841-ccf26dbc99fa/go.mod h1:AuP9J9m+Jzf+wY6WkKPWn3569Y7YBOnwCEFJJ7WZQjA=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util v0.0.0-20211027015841-ccf26dbc99fa h1:+7a4PnHE9RC08WHXMqUm0bKncQp23/yqA6CW0guHeR8=
