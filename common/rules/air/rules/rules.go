@@ -118,6 +118,8 @@ func CompareValuesCond(ruleName string, condName string, tuples map[model.TupleT
 			isNumeric = true
 		}
 
+		log.Debug("isNumeric: ", isNumeric, ", error: ", err.Error())
+
 		if condCtx.CompareNewMetricToValue {
 
 			if isNumeric {
