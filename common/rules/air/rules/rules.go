@@ -83,6 +83,9 @@ func CompareValuesCond(ruleName string, condName string, tuples map[model.TupleT
 	readingTuple := tuples["ReadingEvent"]
 	resourceTuple := tuples["ResourceConcept"]
 
+	log.Debug(fmt.Sprintf("ReadingEvent: [%v]\n", readingTuple))
+	log.Debug(fmt.Sprintf("ResourceConcept: [%v]\n", resourceTuple))
+
 	if readingTuple == nil || resourceTuple == nil || ctx == nil {
 		log.Error("Should not get a nil Reading tuple or no context in compareValuesCond! This is an error")
 		return false
@@ -94,6 +97,8 @@ func CompareValuesCond(ruleName string, condName string, tuples map[model.TupleT
 	if err := json.Unmarshal([]byte(strCtx), &condCtx); err != nil {
 		fmt.Printf("Processing config request ERROR\n")
 	}
+
+	log.Debug(fmt.Sprintf("Condition Context: [%v]\n", condCtx))
 
 	readingTupleDevice, _ := readingTuple.GetString("device")
 	readingTupleResource, _ := readingTuple.GetString("resource")
