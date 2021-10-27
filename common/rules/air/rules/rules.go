@@ -116,9 +116,13 @@ func CompareValuesCond(ruleName string, condName string, tuples map[model.TupleT
 		readingTupleValue, err := strconv.ParseFloat(readingTupleValueStr, 64)
 		if err == nil {
 			isNumeric = true
+		} else {
+			log.Debug("parse data error: ", err.Error())
 		}
 
 		log.Debug("isNumeric: ", isNumeric, ", error: ", err.Error())
+
+		log.Debug("condCtx.CompareNewMetricToValue: ", condCtx.CompareNewMetricToValue, ", condCtx.CompareNewMetricToLastMetric: ", condCtx.CompareNewMetricToLastMetric, ", condCtx.CompareLastMetricToValue: ", condCtx.CompareLastMetricToValue)
 
 		if condCtx.CompareNewMetricToValue {
 
