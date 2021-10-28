@@ -5,10 +5,13 @@ github.com/Shopify/sarama v1.22.0/go.mod h1:lm3THZ8reqBDBQKQyb5HB3sY1lKp3grEbQ81
 github.com/Shopify/sarama v1.26.1/go.mod h1:NbSGBSSndYaIhRcBtY9V0U7AyH+x71bG668AuWys/yU=
 github.com/Shopify/toxiproxy v2.1.4+incompatible/go.mod h1:OXgGpZ6Cli1/URJOF1DMxUHB2q5Ap20/P/eIdh4G0pI=
 github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20211027220139-18400842a761 h1:nxHXZMCRSBIem/LxCWWoxbcEXwqSkA5b0rq97UhKhqM=
+github.com/SteveNY-Tibco/labs-air-contrib v0.0.0-20211028000426-9683623e62ae h1:zB0QS5KERVaZf5CTpG/SmKDm/xvAa/MBMUxrN27UUkc=
 github.com/SteveNY-Tibco/labs-air-contrib/common/notification v0.0.0-20211027195938-ff9ac98e153d h1:wyFvJJ47qju2+IBocnJ7wPMLK04lzykTTTJ5VXblatE=
 github.com/SteveNY-Tibco/labs-air-contrib/common/notification v0.0.0-20211027195938-ff9ac98e153d/go.mod h1:7TSBKTTBm3XYskfac3qIctQhDcaubvxeuYg0bmVc624=
 github.com/SteveNY-Tibco/labs-air-contrib/common/notification v0.0.0-20211027224410-994c3344118f h1:cuOd3NFkCVhqKkDID8EsfQGMg1FPe/9eBXnFhSL7cdQ=
 github.com/SteveNY-Tibco/labs-air-contrib/common/notification v0.0.0-20211027224410-994c3344118f/go.mod h1:7TSBKTTBm3XYskfac3qIctQhDcaubvxeuYg0bmVc624=
+github.com/SteveNY-Tibco/labs-air-contrib/common/notification v0.0.0-20211028000426-9683623e62ae h1:x+iDotrPmmvTgXcE3QTFxXNdg+Rxg3eMUm+IubJAiLQ=
+github.com/SteveNY-Tibco/labs-air-contrib/common/notification v0.0.0-20211028000426-9683623e62ae/go.mod h1:7TSBKTTBm3XYskfac3qIctQhDcaubvxeuYg0bmVc624=
 github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027205553-af9db5ce3c61 h1:0iPi84jdOPUzb/0EfmRm1I5nIqNuo+OKW01xlc7LPFs=
 github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027205553-af9db5ce3c61/go.mod h1:VAikJUvmR0/oA7dkGWOnZVf5ayzv/VLhvJ6WZFNp2X4=
 github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027211620-325dba0190b3 h1:qGwMriLMnnmLNM7Bg/Vv0ftpLKva7YW6YsKkT4s3TrE=
@@ -19,6 +22,10 @@ github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027220139-184
 github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027220139-18400842a761/go.mod h1:VAikJUvmR0/oA7dkGWOnZVf5ayzv/VLhvJ6WZFNp2X4=
 github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027224410-994c3344118f h1:IhOhEBTqTIuZ1lgaG7XT1bRNnRbd3JxmUQkmI9GLBHw=
 github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027224410-994c3344118f/go.mod h1:VAikJUvmR0/oA7dkGWOnZVf5ayzv/VLhvJ6WZFNp2X4=
+github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027230203-aa118a340ef2 h1:HN86UCytt7yFtYzb9YleEO7r2OxapXw3tj9WPf+RG9k=
+github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211027230203-aa118a340ef2/go.mod h1:VAikJUvmR0/oA7dkGWOnZVf5ayzv/VLhvJ6WZFNp2X4=
+github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211028000426-9683623e62ae h1:lc7pBvG+aWSYFjQbQl8tCAp1MVHgIiKKoOkuqGhxPU0=
+github.com/SteveNY-Tibco/labs-air-contrib/common/rules v0.0.0-20211028000426-9683623e62ae/go.mod h1:VAikJUvmR0/oA7dkGWOnZVf5ayzv/VLhvJ6WZFNp2X4=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib v0.0.0-20211027015841-ccf26dbc99fa h1:oKPJutd5kq3Ww/6OjKIOYXoIlta+aION95WberbCmjM=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/keywordreplace v0.0.0-20211027015841-ccf26dbc99fa h1:xKBhg1swsR2y34OWIL5GZShKYkvDPhNYY+ai1E1MJFI=
 github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/keywordreplace v0.0.0-20211027015841-ccf26dbc99fa/go.mod h1:AuP9J9m+Jzf+wY6WkKPWn3569Y7YBOnwCEFJJ7WZQjA=
