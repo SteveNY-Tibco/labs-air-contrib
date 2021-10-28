@@ -173,7 +173,7 @@ func CompareValuesCond(ruleName string, condName string, tuples map[model.TupleT
 
 		}
 
-		if condResult && condCtx.CompareNewMetricToLastMetric {
+		if condCtx.CompareNewMetricToLastMetric {
 
 			if isNumeric {
 				// compare numbers
@@ -220,7 +220,7 @@ func CompareValuesCond(ruleName string, condName string, tuples map[model.TupleT
 
 		}
 
-		if condResult && condCtx.CompareLastMetricToValue {
+		if condCtx.CompareLastMetricToValue {
 
 			if isNumeric {
 				// compare numbers
