@@ -78,8 +78,8 @@ func (this *KeywordReplaceHandler) Replace(keyword string) string {
 		if reflect.String == dataType {
 			return strings.ReplaceAll(data.(string), "\"", "\\\"")
 		} else if reflect.Map == dataType || reflect.Array == dataType {
-			jsonStr, _ := json.Marshal(data)
-			return fmt.Sprintf("%v", jsonStr)
+			jsonBuf, _ := json.Marshal(data)
+			return fmt.Sprintf("%v", string(jsonBuf))
 		}
 		return fmt.Sprintf("%v", this.reading[keyElements[2]])
 	} else {
