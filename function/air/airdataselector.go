@@ -71,9 +71,12 @@ func (this *KeywordReplaceHandler) startToMap() {
 }
 
 func (this *KeywordReplaceHandler) Replace(keyword string) string {
+	log.Info("(KeywordReplaceHandler.Replace) keyword : ", keyword)
 	keyElements := strings.Split(keyword, ".")
 	if "f1" == keyElements[0] {
-		data := this.reading[keyElements[2]]
+		subkey := strings.Split(keyElements[2], "/")
+		log.Info("(KeywordReplaceHandler.Replace) real keyword : ", keyElements[2])
+		data := this.reading[subkey[0]]
 		dataType := reflect.ValueOf(data).Kind()
 		if reflect.String == dataType {
 			return strings.ReplaceAll(data.(string), "\"", "\\\"")
