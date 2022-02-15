@@ -83,9 +83,11 @@ func (this *KeywordReplaceHandler) Replace(keyword string) string {
 			return strings.ReplaceAll(data.(string), "\"", "\\\"")
 		} else if reflect.Map == dataType {
 			if len(subkeyElements) > 1 {
-				subkey := strings.Replace(keyElements[2][len(subkeyElements[0]):], "/", ".", -1)
-				log.Info("(KeywordReplaceHandler.Replace) subkey : ", keyElements[2])
-				data = objectbuilder.LocateObject(data, fmt.format("root%s", subkey)).(interface{})
+				log.Info("(KeywordReplaceHandler.Replace) keyElements[2] : ", keyElements[2])
+				subkey := fmt.Sprintf("root%s", strings.Replace(keyElements[2][len(subkeyElements[0]):], "/", ".", -1))
+				log.Info("(KeywordReplaceHandler.Replace) subkey : ", subkey)
+				data = objectbuilder.LocateObject(data, subkey).(interface{})
+				log.Info("(KeywordReplaceHandler.Replace) data : ", data)
 			}
 			jsonBuf, _ := json.Marshal(data)
 			return fmt.Sprintf("%v", string(jsonBuf))
