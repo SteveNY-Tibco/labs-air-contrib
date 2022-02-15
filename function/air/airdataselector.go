@@ -90,6 +90,7 @@ func (this *KeywordReplaceHandler) Replace(keyword string) string {
 				log.Info("(KeywordReplaceHandler.Replace) data : ", data)
 			}
 			realDataType := reflect.ValueOf(data).Kind()
+			log.Info("(KeywordReplaceHandler.Replace) realDataType : ", realDataType.String())
 			if reflect.Map == realDataType || reflect.Array == realDataType {
 				jsonBuf, _ := json.Marshal(data)
 				return fmt.Sprintf("%v", string(jsonBuf))
