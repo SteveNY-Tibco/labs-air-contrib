@@ -7,6 +7,7 @@ import (
 	"reflect"
 	"strings"
 
+	"github.com/TIBCOSoftware/labs-lightcrane-contrib/common/objectbuilder"
 	"github.com/project-flogo/core/data"
 	"github.com/project-flogo/core/data/expression/function"
 )
@@ -74,13 +75,21 @@ func (this *KeywordReplaceHandler) Replace(keyword string) string {
 	log.Info("(KeywordReplaceHandler.Replace) keyword : ", keyword)
 	keyElements := strings.Split(keyword, ".")
 	if "f1" == keyElements[0] {
-		subkey := strings.Split(keyElements[2], "/")
+		subkeyElements := strings.Split(keyElements[2], "/")
 		log.Info("(KeywordReplaceHandler.Replace) real keyword : ", keyElements[2])
-		data := this.reading[subkey[0]]
+		data := this.reading[subkeyElements[0]]
 		dataType := reflect.ValueOf(data).Kind()
 		if reflect.String == dataType {
 			return strings.ReplaceAll(data.(string), "\"", "\\\"")
-		} else if reflect.Map == dataType || reflect.Array == dataType {
+		} else if reflect.Map == dataType {
+			if len(subkeyElements) > 1 {
+				subkey := strings.Replace(keyElements[2][len(subkeyElements[0]):], "/", ".", -1)
+				log.Info("(KeywordReplaceHandler.Replace) subkey : ", keyElements[2])
+				data = objectbuilder.LocateObject(data, fmt.format("root%s", subkey)).(interface{})
+			}
+			jsonBuf, _ := json.Marshal(data)
+			return fmt.Sprintf("%v", string(jsonBuf))
+		} else if reflect.Array == dataType {
 			jsonBuf, _ := json.Marshal(data)
 			return fmt.Sprintf("%v", string(jsonBuf))
 		}
