@@ -1,8 +1,10 @@
 package air
 
 import (
-	"encoding/json"
+	//	"encoding/json"
+	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/project-flogo/core/data"
 	"github.com/project-flogo/core/data/expression/function"
@@ -33,22 +35,15 @@ func (fnEnsureJson) Eval(params ...interface{}) (interface{}, error) {
 		return in, err
 	}
 
-	jsonStr = strconv.Unquote(string(val))
+	if false == strings.HasPrefix(in, "\"") {
+		return in, nil
+	}
 
-	/*
-		var rootObject interface{}
-		err := json.Unmarshal([]byte(in), &rootObject)
-		if nil != err {
-			log.Error("(fnEnsureJson.Eval) err : ", err.Error())
-			return nil, err
-		}
+	jsonStr, err := strconv.Unquote(in)
+	if nil != err {
+		log.Error("(fnEnsureJson.Eval) Unquote fail, err : ", err.Error())
+		return in, err
+	}
 
-		log.Debug("(fnEnsureJson.Eval) rootObject : ", rootObject)
-
-		jsonBytes, err := json.Marshal(rootObject)
-		if nil != err {
-			return "", err
-		}
-	*/
 	return jsonStr, nil
 }
