@@ -116,6 +116,27 @@ func (this *KeywordReplaceHandler) Replace(keyword string) string {
 //func (this *KeywordReplaceHandler) Replace(keyword string) string {
 //	keyElements := strings.Split(keyword, ".")
 //	if "f1" == keyElements[0] {
+//		data := this.reading[keyElements[2]]
+//		dataType := reflect.ValueOf(data).Kind()
+//		if reflect.String == dataType {
+//			return strings.ReplaceAll(data.(string), "\"", "\\\"")
+//		} else if reflect.Map == dataType || reflect.Array == dataType {
+//			jsonBuf, _ := json.Marshal(data)
+//			return fmt.Sprintf("%v", string(jsonBuf))
+//		}
+//		return fmt.Sprintf("%v", this.reading[keyElements[2]])
+//	} else {
+//		data := this.enriched[keyword]
+//		if nil != data {
+//			return fmt.Sprintf("%v", data)
+//		}
+//	}
+//	return ""
+//}
+
+//func (this *KeywordReplaceHandler) Replace(keyword string) string {
+//	keyElements := strings.Split(keyword, ".")
+//	if "f1" == keyElements[0] {
 //		return fmt.Sprintf("%v", this.reading[keyElements[2]])
 //	} else {
 //		data := this.enriched[keyword]
