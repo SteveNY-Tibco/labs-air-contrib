@@ -74,6 +74,47 @@ func (this *KeywordReplaceHandler) startToMap() {
 func (this *KeywordReplaceHandler) Replace(keyword string) string {
 	log.Info("(KeywordReplaceHandler.Replace) keyword : ", keyword)
 	keyElements := strings.Split(keyword, ".")
+	subkeyElements := strings.Split(keyElements[2], "/")
+	log.Info("(KeywordReplaceHandler.Replace) real keyword : ", keyElements[2])
+	var data interface{}
+	if "f1" == keyElements[0] {
+		data = this.reading[subkeyElements[0]]
+	} else {
+		data = this.enriched[keyword]
+	}
+
+	dataType := reflect.ValueOf(data).Kind()
+	if reflect.String == dataType {
+		return strings.ReplaceAll(data.(string), "\"", "\\\"")
+	} else if reflect.Map == dataType {
+		if len(subkeyElements) > 1 {
+			log.Info("(KeywordReplaceHandler.Replace) keyElements[2] : ", keyElements[2])
+			subkey := fmt.Sprintf("root%s", strings.Replace(keyElements[2][len(subkeyElements[0]):], "/", ".", -1))
+			log.Info("(KeywordReplaceHandler.Replace) subkey : ", subkey)
+			data = objectbuilder.LocateObject(data.(map[string]interface{}), subkey).(interface{})
+			log.Info("(KeywordReplaceHandler.Replace) data : ", data)
+		}
+		realDataType := reflect.ValueOf(data).Kind()
+		log.Info("(KeywordReplaceHandler.Replace) realDataType : ", realDataType.String())
+		if reflect.Map == realDataType || reflect.Array == realDataType || reflect.Slice == realDataType {
+			jsonBuf, _ := json.Marshal(data)
+			log.Info("(KeywordReplaceHandler.Replace) string(jsonBuf) : ", string(jsonBuf))
+			return fmt.Sprintf("%v", string(jsonBuf))
+		} else {
+			log.Info("(KeywordReplaceHandler.Replace) data.(string) : ", data.(string))
+			return strings.ReplaceAll(data.(string), "\"", "\\\"")
+		}
+	} else if reflect.Array == dataType {
+		jsonBuf, _ := json.Marshal(data)
+		return fmt.Sprintf("%v", string(jsonBuf))
+	}
+	return fmt.Sprintf("%v", data)
+}
+
+/*
+func (this *KeywordReplaceHandler) Replace(keyword string) string {
+	log.Info("(KeywordReplaceHandler.Replace) keyword : ", keyword)
+	keyElements := strings.Split(keyword, ".")
 	if "f1" == keyElements[0] {
 		subkeyElements := strings.Split(keyElements[2], "/")
 		log.Info("(KeywordReplaceHandler.Replace) real keyword : ", keyElements[2])
@@ -113,39 +154,39 @@ func (this *KeywordReplaceHandler) Replace(keyword string) string {
 	return ""
 }
 
-//func (this *KeywordReplaceHandler) Replace(keyword string) string {
-//	keyElements := strings.Split(keyword, ".")
-//	if "f1" == keyElements[0] {
-//		data := this.reading[keyElements[2]]
-//		dataType := reflect.ValueOf(data).Kind()
-//		if reflect.String == dataType {
-//			return strings.ReplaceAll(data.(string), "\"", "\\\"")
-//		} else if reflect.Map == dataType || reflect.Array == dataType {
-//			jsonBuf, _ := json.Marshal(data)
-//			return fmt.Sprintf("%v", string(jsonBuf))
-//		}
-//		return fmt.Sprintf("%v", this.reading[keyElements[2]])
-//	} else {
-//		data := this.enriched[keyword]
-//		if nil != data {
-//			return fmt.Sprintf("%v", data)
-//		}
-//	}
-//	return ""
-//}
+func (this *KeywordReplaceHandler) Replace(keyword string) string {
+	keyElements := strings.Split(keyword, ".")
+	if "f1" == keyElements[0] {
+		data := this.reading[keyElements[2]]
+		dataType := reflect.ValueOf(data).Kind()
+		if reflect.String == dataType {
+			return strings.ReplaceAll(data.(string), "\"", "\\\"")
+		} else if reflect.Map == dataType || reflect.Array == dataType {
+			jsonBuf, _ := json.Marshal(data)
+			return fmt.Sprintf("%v", string(jsonBuf))
+		}
+		return fmt.Sprintf("%v", this.reading[keyElements[2]])
+	} else {
+		data := this.enriched[keyword]
+		if nil != data {
+			return fmt.Sprintf("%v", data)
+		}
+	}
+	return ""
+}
 
-//func (this *KeywordReplaceHandler) Replace(keyword string) string {
-//	keyElements := strings.Split(keyword, ".")
-//	if "f1" == keyElements[0] {
-//		return fmt.Sprintf("%v", this.reading[keyElements[2]])
-//	} else {
-//		data := this.enriched[keyword]
-//		if nil != data {
-//			return fmt.Sprintf("%v", data)
-//		}
-//	}
-//	return ""
-//}
+func (this *KeywordReplaceHandler) Replace(keyword string) string {
+	keyElements := strings.Split(keyword, ".")
+	if "f1" == keyElements[0] {
+		return fmt.Sprintf("%v", this.reading[keyElements[2]])
+	} else {
+		data := this.enriched[keyword]
+		if nil != data {
+			return fmt.Sprintf("%v", data)
+		}
+	}
+	return ""
+}*/
 
 func (this *KeywordReplaceHandler) endOfMapping(document string) {
 	this.result = document
