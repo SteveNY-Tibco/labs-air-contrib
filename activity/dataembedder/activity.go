@@ -7,6 +7,7 @@
 package dataembedder
 
 import (
+	"encoding/json"
 	"errors"
 	"sync"
 
