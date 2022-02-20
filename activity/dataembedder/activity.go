@@ -85,10 +85,12 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 	dataTypes, _ := a.getEnrichedDataType(context)
 	var newValue interface{}
 	for key, value := range targetData {
+		logdataType.Info("[DataEmbeddedataTyper:Eval]  key : ", key, ", value : ", value)
 		dataType := "string"
 		if nil != dataTypes && "" != dataTypes[key] {
 			dataType = dataTypes[key]
 		}
+		logdataType.Info("[DataEmbeddedataTyper:Eval]  dataType 01 : ", dataType)
 		if "string" == dataType {
 			var objectValue interface{}
 			if err := json.Unmarshal([]byte(value.(string)), &objectValue); err != nil {
@@ -101,6 +103,7 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 			newValue = value
 		}
 
+		logdataType.Info("[DataEmbeddedataTyper:Eval]  dataType 02 : ", dataType)
 		if nil != value {
 			outputDataCollection = append(outputDataCollection, map[string]interface{}{
 				"producer": producer,
