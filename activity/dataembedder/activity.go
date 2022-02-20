@@ -86,18 +86,18 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 	var newValue interface{}
 	for key, value := range targetData {
 		log.Info("[DataEmbeddedataTyper:Eval]  key : ", key, ", value : ", value)
-		dataType := "string"
+		dataType := "String"
 		if nil != dataTypes && "" != dataTypes[key] {
 			dataType = dataTypes[key]
 		}
 		log.Info("[DataEmbeddedataTyper:Eval]  dataType 01 : ", dataType)
-		if "string" == dataType {
+		if "String" == dataType {
 			var objectValue interface{}
 			if err := json.Unmarshal([]byte(value.(string)), &objectValue); err != nil {
 				newValue = value
 			} else {
 				newValue = objectValue
-				dataType = "object"
+				dataType = "Object"
 			}
 		} else {
 			newValue = value
