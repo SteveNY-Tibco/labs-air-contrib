@@ -94,7 +94,10 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 		log.Info("[DataEmbeddedataTyper:Eval]  dataType 01 : ", dataType)
 		if "String" == dataType {
 			var objectValue interface{}
-			if err := json.Unmarshal([]byte(value.(string)), &objectValue); err != nil {
+			err := json.Unmarshal([]byte(value.(string)), &objectValue)
+			log.Info("[DataEmbeddedataTyper:Eval]  objectValue : ", objectValue)
+			if nil != err {
+				log.Info("[DataEmbeddedataTyper:Eval]  Not object type : ", err.Error())
 				newValue = value
 			} else {
 				newValue = objectValue
@@ -105,8 +108,8 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 		}
 
 		log.Info("[DataEmbeddedataTyper:Eval]  dataType 02 : ", dataType)
-		log.Info("[DataEmbeddedataTyper:Eval]  golang dataType : ", reflect.ValueOf(newValue).Kind())
 		log.Info("[DataEmbeddedataTyper:Eval]  newValue : ", newValue)
+		log.Info("[DataEmbeddedataTyper:Eval]  golang dataType : ", reflect.ValueOf(newValue).Kind().String())
 		if nil != value {
 			outputDataCollection = append(outputDataCollection, map[string]interface{}{
 				"producer": producer,
