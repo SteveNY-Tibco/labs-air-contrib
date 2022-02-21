@@ -28,6 +28,7 @@ func (fnAirDataSelector) Sig() (paramTypes []data.Type, isVariadic bool) {
 }
 
 func (fnAirDataSelector) Eval(params ...interface{}) (interface{}, error) {
+	// f1.airdataselector($flow.gateway, $flow.reading, $flow.enriched, $property["Python.DataIn"])
 	reading := params[1].(map[string]interface{})
 	reading["gateway"] = params[0]
 	enriched := make(map[string]interface{})
@@ -80,8 +81,9 @@ func (this *KeywordReplaceHandler) Replace(keyword string) string {
 	if "f1" == keyElements[0] {
 		data = this.reading[subkeyElements[0]]
 	} else {
-		data = this.enriched[keyword]
+		data = this.enriched[subkeyElements[0]]
 	}
+	log.Info("(KeywordReplaceHandler.Replace) real data : ", data)
 
 	dataType := reflect.ValueOf(data).Kind()
 	if reflect.String == dataType {
