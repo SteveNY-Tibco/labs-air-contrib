@@ -105,7 +105,8 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 		}
 
 		log.Info("[DataEmbeddedataTyper:Eval]  dataType 02 : ", dataType)
-		log.Info("[DataEmbeddedataTyper:Eval]  golang dataType : ", reflect.ValueOf(newValue).Kind().String)
+		log.Info("[DataEmbeddedataTyper:Eval]  golang dataType : ", reflect.ValueOf(newValue).Kind())
+		log.Info("[DataEmbeddedataTyper:Eval]  newValue : ", newValue)
 		if nil != value {
 			outputDataCollection = append(outputDataCollection, map[string]interface{}{
 				"producer": producer,
