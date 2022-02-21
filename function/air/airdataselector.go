@@ -81,7 +81,14 @@ func (this *KeywordReplaceHandler) Replace(keyword string) string {
 	if "f1" == keyElements[0] {
 		data = this.reading[subkeyElements[0]]
 	} else {
-		data = this.enriched[subkeyElements[0]]
+		/*
+			keyword : PythonService1..Result/result[]
+			keyElements[0] : PythonService1
+			subkeyElements[0] : Result
+			enriched : map[PythonService1..Result:{"id": "process:abc", "input1": [[2, 1], [3, 4]], "input2": [[6, 5], [8, 7]], "result": [2, 1, 3, 4, 6, 5, 8, 7]}]
+
+		*/
+		data = this.enriched[fmt.Sprintf("%s..%s", keyElements[0], subkeyElements[0])]
 	}
 	log.Info("(KeywordReplaceHandler.Replace) real data : ", data)
 
