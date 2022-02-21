@@ -9,6 +9,7 @@ package dataembedder
 import (
 	"encoding/json"
 	"errors"
+	"reflect"
 	"sync"
 
 	"github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util"
@@ -104,6 +105,7 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 		}
 
 		log.Info("[DataEmbeddedataTyper:Eval]  dataType 02 : ", dataType)
+		log.Info("[DataEmbeddedataTyper:Eval]  golang dataType : ", reflect.ValueOf(newValue).Kind().String)
 		if nil != value {
 			outputDataCollection = append(outputDataCollection, map[string]interface{}{
 				"producer": producer,

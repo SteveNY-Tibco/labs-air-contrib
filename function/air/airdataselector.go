@@ -93,6 +93,7 @@ func (this *KeywordReplaceHandler) Replace(keyword string) string {
 	log.Info("(KeywordReplaceHandler.Replace) real data : ", data)
 
 	dataType := reflect.ValueOf(data).Kind()
+	log.Info("(KeywordReplaceHandler.Replace) dataType : ", dataType.String())
 	if reflect.String == dataType {
 		return strings.ReplaceAll(data.(string), "\"", "\\\"")
 	} else if reflect.Map == dataType {
