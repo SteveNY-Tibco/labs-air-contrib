@@ -9,7 +9,6 @@ package dataembedder
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"reflect"
 	"sync"
 
