@@ -9,6 +9,7 @@ package dataembedder
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"reflect"
 	"sync"
 
@@ -91,6 +92,15 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 		if nil != dataTypes && "" != dataTypes[key] {
 			dataType = dataTypes[key]
 		}
+
+		var oValue interface{}
+		svalue := value.(string)
+		err := json.Unmarshal([]byte(svalue), &oValue)
+		if nil != err {
+			fmt.Printf("err : %v", err)
+		}
+		fmt.Printf("oValue : %v", oValue)
+
 		log.Info("[DataEmbeddedataTyper:Eval]  dataType 01 : ", dataType)
 		if "String" == dataType {
 			var objectValue interface{}
