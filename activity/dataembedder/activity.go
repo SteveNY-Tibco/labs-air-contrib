@@ -18,7 +18,7 @@ import (
 	"github.com/TIBCOSoftware/flogo-lib/logger"
 )
 
-var log = logger.GetLogger("tibco-f1-DataEmbedder")
+var log = logger.GetLogger("tibco-f1-DataEmbedder-0")
 
 var initialized bool = false
 
@@ -97,9 +97,9 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 		svalue := value.(string)
 		err := json.Unmarshal([]byte(svalue), &oValue)
 		if nil != err {
-			fmt.Printf("err : %v", err)
+			log.Info(" =============> err : ", err)
 		}
-		fmt.Printf("oValue : %v", oValue)
+		log.Info(" =============> oValue : ", oValue)
 
 		log.Info("[DataEmbedder:Eval]  dataType 01 : ", dataType)
 		if "String" == dataType {
