@@ -87,7 +87,7 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 	dataTypes, _ := a.getEnrichedDataType(context)
 	var newValue interface{}
 	for key, value := range targetData {
-		log.Info("[DataEmbeddedataTyper:Eval]  key : ", key, ", value : ", value)
+		log.Info("[DataEmbedder:Eval]  key : ", key, ", value : ", value)
 		dataType := "String"
 		if nil != dataTypes && "" != dataTypes[key] {
 			dataType = dataTypes[key]
@@ -101,13 +101,13 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 		}
 		fmt.Printf("oValue : %v", oValue)
 
-		log.Info("[DataEmbeddedataTyper:Eval]  dataType 01 : ", dataType)
+		log.Info("[DataEmbedder:Eval]  dataType 01 : ", dataType)
 		if "String" == dataType {
 			var objectValue interface{}
 			err := json.Unmarshal([]byte(value.(string)), &objectValue)
-			log.Info("[DataEmbeddedataTyper:Eval]  objectValue : ", objectValue)
+			log.Info("[DataEmbedder:Eval]  objectValue : ", objectValue)
 			if nil != err {
-				log.Info("[DataEmbeddedataTyper:Eval]  Not object type : ", err.Error())
+				log.Info("[DataEmbedder:Eval]  Not object type : ", err.Error())
 				newValue = value
 			} else {
 				newValue = objectValue
@@ -117,9 +117,9 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 			newValue = value
 		}
 
-		log.Info("[DataEmbeddedataTyper:Eval]  dataType 02 : ", dataType)
-		log.Info("[DataEmbeddedataTyper:Eval]  newValue : ", newValue)
-		log.Info("[DataEmbeddedataTyper:Eval]  golang dataType : ", reflect.ValueOf(newValue).Kind().String())
+		log.Info("[DataEmbedder:Eval]  dataType 02 : ", dataType)
+		log.Info("[DataEmbedder:Eval]  newValue : ", newValue)
+		log.Info("[DataEmbedder:Eval]  golang dataType : ", reflect.ValueOf(newValue).Kind().String())
 		if nil != value {
 			outputDataCollection = append(outputDataCollection, map[string]interface{}{
 				"producer": producer,
