@@ -92,17 +92,9 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 			dataType = dataTypes[key]
 		}
 
-		var oValue interface{}
-		svalue := value.(string)
-		err := json.Unmarshal([]byte(svalue), &oValue)
-		if nil != err {
-			log.Error(" =============> err : ", err)
-		}
-		log.Info(" =============> oValue : ", oValue)
-
 		log.Info("[Eval]  dataType 01 : ", dataType)
 		if "String" == dataType {
-			var objectValue interface{}
+			var objectValue map[string]interface{}
 			err := json.Unmarshal([]byte(value.(string)), &objectValue)
 			log.Info("[Eval]  objectValue : ", objectValue)
 			if nil != err {
