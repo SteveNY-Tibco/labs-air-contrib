@@ -53,31 +53,31 @@ func (a *DataEmbedder) Metadata() *activity.Metadata {
 
 func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 
-	log.Info("[DataEmbedder:Eval] entering ........ ")
+	log.Info("[Eval] entering ........ ")
 
 	producer, ok := context.GetInput(iProducer).(string)
 	if !ok {
 		return false, errors.New("Invalid producer ... ")
 	}
-	log.Info("[DataEmbedder:Eval]  producer : ", producer)
+	log.Info("[Eval]  producer : ", producer)
 
 	consumer, ok := context.GetInput(iConsumer).(string)
 	if !ok {
 		return false, errors.New("Invalid consumer ... ")
 	}
-	log.Info("[DataEmbedder:Eval]  consumer : ", consumer)
+	log.Info("[Eval]  consumer : ", consumer)
 
 	targetData, ok := context.GetInput(iTargetData).(map[string]interface{})
 	if !ok {
 		return false, errors.New("Invalid targetData ... ")
 	}
-	log.Info("[DataEmbedder:Eval]  targetData : ", targetData)
+	log.Info("[Eval]  targetData : ", targetData)
 
 	inputDataCollection, ok := context.GetInput(iInputDataCollection).([]interface{})
 	if !ok {
 		return false, errors.New("Invalid inputDataCollection ... ")
 	}
-	log.Info("[DataEmbedder:Eval]  inputDataCollection : ", inputDataCollection)
+	log.Info("[Eval]  inputDataCollection : ", inputDataCollection)
 
 	outputDataCollection := make([]interface{}, len(inputDataCollection))
 	for index, data := range inputDataCollection {
@@ -87,7 +87,7 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 	dataTypes, _ := a.getEnrichedDataType(context)
 	var newValue interface{}
 	for key, value := range targetData {
-		log.Info("[DataEmbedder:Eval]  key : ", key, ", value : ", value)
+		log.Info("[Eval]  key : ", key, ", value : ", value)
 		dataType := "String"
 		if nil != dataTypes && "" != dataTypes[key] {
 			dataType = dataTypes[key]
@@ -97,17 +97,17 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 		svalue := value.(string)
 		err := json.Unmarshal([]byte(svalue), &oValue)
 		if nil != err {
-			log.Info(" =============> err : ", err)
+			log.Error(" =============> err : ", err)
 		}
 		log.Info(" =============> oValue : ", oValue)
 
-		log.Info("[DataEmbedder:Eval]  dataType 01 : ", dataType)
+		log.Info("[Eval]  dataType 01 : ", dataType)
 		if "String" == dataType {
 			var objectValue interface{}
 			err := json.Unmarshal([]byte(value.(string)), &objectValue)
-			log.Info("[DataEmbedder:Eval]  objectValue : ", objectValue)
+			log.Info("[Eval]  objectValue : ", objectValue)
 			if nil != err {
-				log.Info("[DataEmbedder:Eval]  Not object type : ", err.Error())
+				log.Info("[Eval]  Not object type : ", err.Error())
 				newValue = value
 			} else {
 				newValue = objectValue
@@ -117,9 +117,9 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 			newValue = value
 		}
 
-		log.Info("[DataEmbedder:Eval]  dataType 02 : ", dataType)
-		log.Info("[DataEmbedder:Eval]  newValue : ", newValue)
-		log.Info("[DataEmbedder:Eval]  golang dataType : ", reflect.ValueOf(newValue).Kind().String())
+		log.Info("[Eval]  dataType 02 : ", dataType)
+		log.Info("[Eval]  newValue : ", newValue)
+		log.Info("[Eval]  golang dataType : ", reflect.ValueOf(newValue).Kind().String())
 		if nil != value {
 			outputDataCollection = append(outputDataCollection, map[string]interface{}{
 				"producer": producer,
@@ -131,10 +131,10 @@ func (a *DataEmbedder) Eval(context activity.Context) (done bool, err error) {
 		}
 	}
 
-	log.Info("[DataEmbedder:Eval]  oOutputDataCollection : ", outputDataCollection)
+	log.Info("[Eval]  oOutputDataCollection : ", outputDataCollection)
 	context.SetOutput(oOutputDataCollection, outputDataCollection)
 
-	log.Info("[DataEmbedder:Eval] exit ........ ")
+	log.Info("[Eval] exit ........ ")
 
 	return true, nil
 }
@@ -149,7 +149,7 @@ func (a *DataEmbedder) getEnrichedDataType(ctx activity.Context) (map[string]str
 		if nil == dataTypes {
 			dataTypes = make(map[string]string)
 			variablesDef, _ := ctx.GetSetting(sTargets)
-			log.Info("(DataEmbedder.getEnrichedDataType) enriched data def = ", variablesDef)
+			log.Info("[getEnrichedDataType] enriched data def = ", variablesDef)
 			for _, variableDef := range variablesDef.([]interface{}) {
 				variableInfo := variableDef.(map[string]interface{})
 				dataTypes[variableInfo["Name"].(string)] = variableInfo["Type"].(string)
