@@ -3,7 +3,7 @@ package window
 import (
 	"testing"
 
-	"github.com/SteveNY-Tibco/labs-air-contrib/ModelOps/activity/aggregate/window/functions"
+	"github.com/SteveNY-Tibco/labs-air-contrib/activity/aggregate/window/functions"
 	"github.com/stretchr/testify/assert"
 )
 
