@@ -15,8 +15,8 @@ import (
 	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph"
 	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/api"
 
-	//	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/api/v1"
-	//	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/api/v2"
+//	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/api/v1"
+//	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/api/v2"
 	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/api/v200"
 	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/cache"
 	"github.com/SteveNY-Tibco/labs-air-contrib/common/graphbuilder/dbservice/dgraph/rdf"

@@ -12,12 +12,12 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util"
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
+	"github.com/SteveNY-Tibco/labs-lightcrane-contrib/common/util"
 )
 
-var log = logger.GetLogger("tibco-f1-DataEmbedder-0")
+var log = logger.GetLogger("tibco-f1-DataEmbedder")
 
 var initialized bool = false
 
